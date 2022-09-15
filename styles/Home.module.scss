@@ -1,15 +1,22 @@
 .container {
   padding: 0 2rem;
+  background: rgb(102,38,107);
+  background: linear-gradient(273deg, rgba(102,38,107,1) 30%, rgba(0,199,204,1) 100%);
 }
 
 .main {
   min-height: 100vh;
-  padding: 4rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: rgb(204, 204, 204, 0.5);
+}
+
+.logo {
+max-width: 30px;
+max-height: 30px;
 }
 
 .footer {
@@ -28,19 +35,10 @@
   flex-grow: 1;
 }
 
-.title a {
-  color: #0070f3;
-  text-decoration: none;
-}
-
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
-}
-
 .title {
-  margin: 0;
+  color: #3c3692;
+  text-decoration: none;
+  margin-bottom: 10px;
   line-height: 1.15;
   font-size: 4rem;
 }
@@ -51,7 +49,7 @@
 }
 
 .description {
-  margin: 4rem 0;
+  margin-top: 20px;
   line-height: 1.5;
   font-size: 1.5rem;
 }
