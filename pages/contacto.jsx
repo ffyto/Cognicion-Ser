@@ -24,6 +24,7 @@ export default function Contact() {
                   height={30}
                   unoptimized={true}
                   src='/facebook-logo.png'
+                  alt='Link a Facebook'
                   className={styles.image}
                 />
               </a>
@@ -34,15 +35,17 @@ export default function Contact() {
                   unoptimized={true}
                   src='/instagram-logo.png'
                   className={styles.image}
+                  alt='Link a Instagram'
                 />
               </a>
               <a href='https://wa.me/573146052920' target='blank'>
                 <Image
-                  width={35}
-                  height={35}
+                  width={32}
+                  height={32}
                   unoptimized={true}
                   src='/whatsapp-logo.png'
                   className={styles.image}
+                  alt='Link a WhatsApp'
                 />
               </a>
             </div>

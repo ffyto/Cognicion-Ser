@@ -1,0 +1,13 @@
+.image {
+  border: 3px solid rgba(28,128,148);
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.image:hover {
+  opacity: 0.6;
+  transition-duration: 0.1s;
+}

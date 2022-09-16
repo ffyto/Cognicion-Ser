@@ -1,10 +1,17 @@
 .footer {
-  max-height: 10vh;
+  height: auto;
   display: flex;
-  flex: 1;
-  padding: 2rem 0;
+  flex-direction: row;
   border-top: 1px solid #373737;
   justify-content: center;
   align-items: center;
   font-family: Lucida Handwriting;
+}
+
+.redes {
+  margin-left: 20px;
+}
+
+.logo {
+  margin-left: 20px;
 }

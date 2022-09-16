@@ -12,7 +12,9 @@ export default function Home() {
         <p className={styles.description}>
           Evaluación Neuropsicológica y Rehabilitación Cognitiva
         </p>
-        <p className={styles.description}>Atención Presencial y Virtual</p>
+        <p className={styles.description}>
+          <small>Atención Presencial y Virtual</small>
+        </p>
 
         <div className={styles.grid}>
           <Link href='/acerca-de'>
@@ -29,7 +31,7 @@ export default function Home() {
             </a>
           </Link>
 
-          <Link href='/acerca-de'>
+          <Link href='/solicitar-cita'>
             <a className={styles.card}>
               <h2>Separe una cita &rarr;</h2>
               <p>Contrate nuestros servicios</p>
