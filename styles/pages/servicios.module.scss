@@ -1,0 +1,121 @@
+.container {
+  display: block;
+  text-align: center;
+  flex-direction: column;
+  background: linear-gradient(273deg, rgba(98,68,119,0.8) 30%, rgba(28,128,148,0.8) 100%);
+}
+
+.main {
+  height: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255,255,255,0.8);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: Alcubierre;
+}
+
+.footer {
+  max-height: 10vh;
+  display: flex;
+  flex: 1;
+  padding: 2rem 0;
+  border-top: 1px solid #373737;
+  justify-content: center;
+  align-items: center;
+  font-family: Lucida Handwriting;
+}
+
+.description {
+  color: #624477;
+  font-size: 1.5rem;
+  margin-top: 5px;
+  font-family: Franklin Gothic Medium;
+}
+
+.grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 800px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  margin: 7px 15px 8px;
+  padding: 1.5rem;
+  text-align: left;
+  text-decoration: none;
+  border: 1px solid rgba(28,128,148);
+  border-radius: 10px;
+  width: 40%;
+  height: auto;
+  background: white;
+  box-shadow: 11px 10px 28px -8px rgba(0,0,0,0.75);
+  font-family: Franklin Gothic Medium;
+
+  h2 {
+    text-align: center;
+    margin: 0 0 1rem 0;
+    font-size: 1.2rem;
+    color: #624477;
+  }
+
+  ul {
+    list-style-type: "→";
+    padding: 0;
+  }
+
+  li {
+    text-align: left;
+    font-weight: bolder;
+    color: #000000;
+    margin-bottom: 13px;
+    margin-left: 5px;
+    font-family:Helvetica;
+  }
+
+  h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+    color: #000000;
+  }
+
+  p {
+    text-align: left;
+    font-weight: bolder;
+    color: #000000;
+    margin-bottom: 5px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+}
+
+.service {
+  display: flex;
+  border: 5px solid rgba(28,128,148);
+  border-radius: 10px;
+  width: 90%;
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px;
+  flex-wrap: wrap;
+}
+
+.image {
+  border-radius: 5px;
+}
+
+@media (max-width: 600px) {
+  .grid {
+    width: 100%;
+    flex-direction: column;
+  }
+}
+
