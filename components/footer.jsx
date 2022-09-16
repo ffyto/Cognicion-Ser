@@ -11,6 +11,7 @@ function Footer() {
           alt='Cognición y Ser Logo'
           width={72}
           height={72}
+          unoptimized={true}
         />
       </span>
     </footer>

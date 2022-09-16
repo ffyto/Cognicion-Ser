@@ -73,9 +73,11 @@
   }
 
   li {
-    font-weight: lighter;
+    text-align: left;
+    font-weight: bolder;
     color: #000000;
-    margin-bottom: 5px;
+    margin-bottom: 13px;
+    font-family:Helvetica;
   }
 
   h3 {
@@ -85,10 +87,28 @@
   }
 
   p {
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.5;
+    text-align: left;
+    font-weight: bolder;
+    color: #000000;
+    margin-bottom: 5px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
+}
+
+.service {
+  display: flex;
+  border: 5px solid rgba(28,128,148);
+  border-radius: 10px;
+  width: 90%;
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px;
+  flex-wrap: wrap;
+}
+
+.image {
+  border-radius: 5px;
 }
 
 @media (max-width: 600px) {

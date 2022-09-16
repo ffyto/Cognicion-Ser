@@ -14,6 +14,7 @@ export default function Header() {
         width={200}
         height={200}
         alt='Cognición & Ser Logo'
+        unoptimized={true}
       />
     </div>
   );
