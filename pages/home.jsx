@@ -36,7 +36,7 @@ export default function Home() {
             </a>
           </Link>
 
-          <Link href='/acerca-de'>
+          <Link href='/contacto'>
             <a className={styles.card}>
               <h2>Contáctenos &rarr;</h2>
               <p>Conozca nuestros canales de atención</p>

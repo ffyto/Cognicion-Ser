@@ -1,0 +1,63 @@
+import Header from '../components/header';
+import styles from '../styles/pages/contacto.module.scss';
+import Footer from '../components/footer';
+import Image from 'next/image';
+
+export default function Contact() {
+  return (
+    <div className={styles.container}>
+      <main className={styles.main}>
+        <Header />
+        <p className={styles.description}>Nuestros Canales de Atención</p>
+        <p className={styles.description}>
+          <small>
+            Escríbanos o llamenos para aclarar sus dudas o agendar una cita
+          </small>
+        </p>
+        <div className={styles.grid}>
+          <div className={styles.card}>
+            <p>Redes Sociales: @cognicionyser</p>
+            <div className='redes'>
+              <a href='https://www.facebook.com' target='blank'>
+                <Image
+                  width={30}
+                  height={30}
+                  unoptimized={true}
+                  src='/facebook-logo.png'
+                  className={styles.image}
+                />
+              </a>
+              <a href='https://www.instagram.com' target='blank'>
+                <Image
+                  width={50}
+                  height={30}
+                  unoptimized={true}
+                  src='/instagram-logo.png'
+                  className={styles.image}
+                />
+              </a>
+              <a href='https://wa.me/573146052920' target='blank'>
+                <Image
+                  width={35}
+                  height={35}
+                  unoptimized={true}
+                  src='/whatsapp-logo.png'
+                  className={styles.image}
+                />
+              </a>
+            </div>
+            <a href='mailto:cognicionyser@gmail.com'>
+              email: cognicionyser@gmail.com
+            </a>
+
+            <p>
+              Teléfonos: <a href='tel:+573146052920'>3146052920</a> -{' '}
+              <a href='tel:+573147842014'>3147842014</a>
+            </p>
+          </div>
+        </div>
+      </main>
+      <Footer />
+    </div>
+  );
+}
