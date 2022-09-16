@@ -33,7 +33,7 @@ export default function Home() {
 
           <Link href='/solicitar-cita'>
             <a className={styles.card}>
-              <h2>Separe una cita &rarr;</h2>
+              <h2>Separe su cita &rarr;</h2>
               <p>Contrate nuestros servicios</p>
             </a>
           </Link>

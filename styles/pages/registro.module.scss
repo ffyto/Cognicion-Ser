@@ -1,0 +1,193 @@
+.container {
+  display: block;
+  text-align: center;
+  flex-direction: column;
+  background: linear-gradient(273deg, rgba(98,68,119,0.8) 30%, rgba(28,128,148,0.8) 100%);
+}
+
+.main {
+  height: 130vh;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255,255,255,0.8);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: Alcubierre;
+}
+
+.signupForm__form {
+  display: block;
+  padding: 10px;
+  height: auto;
+  max-width: 350px;
+  text-align: center;
+  background-color: #ffffff;
+  padding: 25px 40px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  justify-content: space-around;
+  font-family: '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+
+    h1 {
+      text-align: center;
+      color: #5e6c84;
+      font-size: 16px;
+      letter-spacing: -0.01em;
+      line-height: 28px;
+      margin-top: 10px;
+      margin-bottom: 25px;
+    }
+
+    hr {
+      display: block;
+      height: 1px;
+      border: 0;
+      border-top: 1px solid hsl(0, 0%, 80%);
+      margin: 2em;
+    }
+
+    a {
+      color: #0052cc;
+      text-decoration: none;
+    }
+
+  }
+
+.signup__label {
+  color: #5e6c84;
+  display: flex;
+  text-align: left;
+  font-size: 15px;
+  &__span {
+    color: red;
+    margin-left: 3px;
+  }
+}
+
+
+
+.signupForm__email,
+.signupForm__name,
+.signupForm__userName,
+.signupForm__lastName,
+.signupForm__password {
+  width: 100%;
+  height: 44px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  line-height: 16px;
+  color: #5e6c84;
+  background-color: #f9fafc;
+  font: inherit;
+  border: 1px solid #cdd2d4;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.signupForm__email:focus {
+  outline: none;
+  border: 1px solid rgba(98,68,119,0.8);
+  box-shadow: 0 0 10px rgba(98,68,119,0.8);
+  transition-duration: 0.4s;
+}
+
+.signupForm__name:focus {
+  outline: none;
+  border: 1px solid rgba(98,68,119,0.8);
+  box-shadow: 0 0 10px rgba(98,68,119,0.8);
+  transition-duration: 0.4s;
+}
+
+.signupForm__lastName:focus {
+  outline: none;
+  border: 1px solid rgba(98,68,119,0.8);
+  box-shadow: 0 0 10px rgba(98,68,119,0.8);
+  transition-duration: 0.4s;
+}
+
+.signupForm__password:focus {
+  outline: none;
+  border: 1px solid rgba(98,68,119,0.8);
+  box-shadow: 0 0 10px rgba(98,68,119,0.8);
+  transition-duration: 0.4s;
+}
+
+.signupForm__email::placeholder {
+color: #cdd2d4;
+font-style: italic;
+opacity: 0.8;
+}
+
+.signupForm__name::placeholder {
+  color: #cdd2d4;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.signupForm__lastName::placeholder {
+  color: #cdd2d4;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.signupForm__userName::placeholder {
+  color: #cdd2d4;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.signupForm__password::placeholder {
+  color: #cdd2d4;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.signupForm__button {
+  margin-top: 20px;
+  color: rgb(255, 255, 255);
+  width: 100%;
+  height: 8%;
+  font: inherit;
+  border: none;
+  background-color: rgb(28,128,148,0.8);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.signupForm__button:hover {
+  transition-duration: 0.4s;
+  background-color: rgb(111, 187, 90);
+}
+
+@media (min-width: 640px) {
+
+  .signupForm__form {
+    display: block;
+    padding-bottom: 50px;
+    height: auto;
+    max-width: 400px;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 30px 40px;
+    box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: auto;
+    justify-content: space-around;
+    font-family: '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  }
+
+
+}
+

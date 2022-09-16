@@ -4,7 +4,7 @@ import Footer from '../components/footer';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function About() {
+export default function PreBook() {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -19,8 +19,12 @@ export default function About() {
                 <a>canales de atención</a>
               </Link>{' '}
               para solicitar una cita, o{' '}
-              <Link href='/contacto'>
+              <Link href='/registro'>
                 <a>registrarse</a>
+              </Link>{' '}
+              o{' '}
+              <Link href='/login'>
+                <a>iniciar sesión</a>
               </Link>{' '}
               en el sitio para agendarla usted mismo, con base en la
               disponibilidad.
