@@ -12,7 +12,7 @@ export default function Header() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <div className={styles.image}>
-        <Link href='/home'>
+        <Link href='/'>
           <a>
             <Image
               src='/LOGO-colorsinfondo.png'

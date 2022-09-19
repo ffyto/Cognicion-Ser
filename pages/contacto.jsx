@@ -11,7 +11,7 @@ export default function Contact() {
         <p className={styles.description}>Nuestros Canales de Atención</p>
         <p className={styles.description}>
           <small>
-            Escríbanos o llamenos para aclarar sus dudas o agendar una cita
+            Escríbanos o llámenos para aclarar sus dudas o agendar una cita
           </small>
         </p>
         <div className={styles.grid}>
@@ -50,7 +50,7 @@ export default function Contact() {
               </a>
             </div>
             <a href='mailto:cognicionyser@gmail.com'>
-              email: cognicionyser@gmail.com
+              Email: cognicionyser@gmail.com
             </a>
 
             <p>
