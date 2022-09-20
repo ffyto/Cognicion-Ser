@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import Header from '../components/header';
 import styles from '../styles/pages/registro.module.scss';
 import Footer from '../components/footer';
@@ -6,6 +8,7 @@ import Link from 'next/link';
 
 export default function Register() {
   const [form, setForm] = useState({});
+  const [startDate, setStartDate] = useState(new Date());
 
   const handleChange = e => {
     const { value, name } = e.target;
@@ -15,12 +18,6 @@ export default function Register() {
   const handleSignUp = e => {
     e.preventDefault();
     // newUser();
-  };
-
-  const handleClick = e => {
-    e.preventDefault();
-    const inputDate = document.getElementById('inputDate');
-    inputDate.datepicker();
   };
 
   return (
@@ -56,15 +53,13 @@ export default function Register() {
             Fecha de Nacimiento{' '}
             <span className={styles.signup__label__span}>*</span>
           </span>
-          <input
+
+          <DatePicker
+            selected={startDate}
+            onChange={date => setStartDate(date)}
             className={styles.signupForm__birthday}
-            type='date'
-            name='birthday'
-            required
-            id='inputDate'
-            onClick={handleClick}
-            onChange={handleChange}
           />
+
           <span className={styles.signup__label}>
             Email <span className={styles.signup__label__span}>*</span>
           </span>
