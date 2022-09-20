@@ -93,8 +93,6 @@ UserSchema.methods.comparePassword = async function comparepassword(
   }
 };
 
-//* 3 se asigna el schema al modelo
 const User = mongoose.model('User', UserSchema);
 
-//* 4 se exporta el modelo
 module.exports = User;

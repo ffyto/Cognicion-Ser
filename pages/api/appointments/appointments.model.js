@@ -33,6 +33,6 @@ const AppointmentSchema = new mongoose.Schema(
   }
 );
 
-const Board = mongoose.model('Board', BoardSchema);
+const Appointment = mongoose.model('Appointment', AppointmentSchema);
 
-module.exports = Board;
+module.exports = Appointment;
