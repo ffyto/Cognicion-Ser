@@ -17,23 +17,18 @@ export default function Register() {
     // newUser();
   };
 
+  const handleClick = e => {
+    e.preventDefault();
+    const inputDate = document.getElementById('inputDate');
+    inputDate.datepicker();
+  };
+
   return (
     <div className={styles.container}>
       <main className={styles.main}>
         <Header />
         <form className={styles.signupForm__form} onSubmit={handleSignUp}>
           <h1>Formulario de Registro</h1>
-          <span className={styles.signup__label}>
-            Email <span className={styles.signup__label__span}>*</span>
-          </span>
-          <input
-            className={styles.signupForm__email}
-            type='email'
-            name='email'
-            placeholder=' Ingrese su correo electrónico'
-            required
-            onChange={handleChange}
-          />
 
           <span className={styles.signup__label}>
             Nombre <span className={styles.signup__label__span}>*</span>
@@ -53,7 +48,31 @@ export default function Register() {
             className={styles.signupForm__lastName}
             type='text'
             name='lastName'
-            placeholder=' Enter your last name'
+            placeholder=' Ingrese sus apellidos'
+            required
+            onChange={handleChange}
+          />
+          <span className={styles.signup__label}>
+            Fecha de Nacimiento{' '}
+            <span className={styles.signup__label__span}>*</span>
+          </span>
+          <input
+            className={styles.signupForm__birthday}
+            type='date'
+            name='birthday'
+            required
+            id='inputDate'
+            onClick={handleClick}
+            onChange={handleChange}
+          />
+          <span className={styles.signup__label}>
+            Email <span className={styles.signup__label__span}>*</span>
+          </span>
+          <input
+            className={styles.signupForm__email}
+            type='email'
+            name='email'
+            placeholder=' Ingrese su correo electrónico'
             required
             onChange={handleChange}
           />

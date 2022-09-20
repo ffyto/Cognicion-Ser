@@ -16,18 +16,14 @@ const AppointmentSchema = new mongoose.Schema(
       ref: 'User',
       required: true,
     },
-    professional: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-      },
-    ],
-    columns: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Column',
-      },
-    ],
+    pacient: {
+      type: { name: String, lastName: String, birthday: Date },
+      required: true,
+    },
+    professional: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
     date: {
       type: Date,
     },

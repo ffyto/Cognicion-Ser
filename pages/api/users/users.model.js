@@ -28,6 +28,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    birthday: {
+      type: Date,
+      required: true,
+    },
     appointments: [
       {
         type: mongoose.Schema.Types.ObjectId,

@@ -6,7 +6,7 @@
 }
 
 .main {
-  height: 115vh;
+  height: auto;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -56,6 +56,7 @@
     a {
       color: #0052cc;
       text-decoration: none;
+      padding-bottom: 10px;
     }
 
   }
@@ -72,12 +73,12 @@
 }
 
 
-
 .signupForm__email,
 .signupForm__name,
 .signupForm__userName,
 .signupForm__lastName,
-.signupForm__password {
+.signupForm__password,
+.signupForm__birthday {
   width: 100%;
   height: 44px;
   margin-top: 5px;
@@ -169,6 +170,9 @@ opacity: 0.8;
 
 @media (min-width: 640px) {
 
+  .main {
+    height: auto;
+  }
   .signupForm__form {
     display: block;
     padding-bottom: 50px;
@@ -182,7 +186,7 @@ opacity: 0.8;
     margin-left: auto;
     margin-right: auto;
     margin-top: 5px;
-    margin-bottom: auto;
+    margin-bottom: 20px;
     justify-content: space-around;
     font-family: '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
       Ubuntu, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
