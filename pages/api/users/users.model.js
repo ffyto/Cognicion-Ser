@@ -1,10 +1,9 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-require('dotenv').config();
+import { Schema, model, models } from 'mongoose';
+import bcrypt from 'bcrypt';
 
 const { SALT_ROUNDS } = process.env;
 
-const UserSchema = new mongoose.Schema(
+const UserSchema = new Schema(
   {
     avatar: {
       type: String,
@@ -34,7 +33,7 @@ const UserSchema = new mongoose.Schema(
     },
     appointments: [
       {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Appointment',
       },
     ],
@@ -93,6 +92,4 @@ UserSchema.methods.comparePassword = async function comparepassword(
   }
 };
 
-const User = mongoose.model('User', UserSchema);
-
-module.exports = User;
+export default models.User || model('User', UserSchema);

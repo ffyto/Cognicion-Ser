@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import { Schema, model, models } from 'mongoose';
 
-const AppointmentSchema = new mongoose.Schema(
+const AppointmentSchema = new Schema(
   {
     title: {
       type: String,
@@ -12,7 +12,7 @@ const AppointmentSchema = new mongoose.Schema(
       type: String,
     },
     user: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
     },
@@ -21,7 +21,7 @@ const AppointmentSchema = new mongoose.Schema(
       required: true,
     },
     professional: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'User',
     },
     date: {
@@ -33,6 +33,4 @@ const AppointmentSchema = new mongoose.Schema(
   }
 );
 
-const Appointment = mongoose.model('Appointment', AppointmentSchema);
-
-module.exports = Appointment;
+export default models.Appointment || model('Appointment', AppointmentSchema);
