@@ -1,9 +1,12 @@
 import { useState } from 'react';
-import DatePicker from 'react-datepicker';
+import DatePicker, { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import es from 'date-fns/locale/es';
 import setHours from 'date-fns/setHours';
 import setMinutes from 'date-fns/setMinutes';
 import styles from '../styles/components/calendar.module.scss';
+
+registerLocale('es', es);
 
 function Calendar() {
   const [startDate, setStartDate] = useState(null);
@@ -52,6 +55,7 @@ function Calendar() {
   return (
     <div>
       <DatePicker
+        locale='es'
         placeholderText='Seleccione uno de los espacios disponibles...'
         selected={startDate}
         onChange={date => setStartDate(date)}

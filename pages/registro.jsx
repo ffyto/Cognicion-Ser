@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { getUserByEmail, createUser } from '../services/users';
 import { useRouter } from 'next/router';
-import DatePicker from 'react-datepicker';
+import DatePicker, { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import es from 'date-fns/locale/es'; // the locale you want
 import Swal from 'sweetalert2';
 import Header from '../components/header';
 import styles from '../styles/pages/registro.module.scss';
 import Footer from '../components/footer';
 import Link from 'next/link';
+
+registerLocale('es', es); // register it with the name you want
 
 export default function Register() {
   const router = useRouter();
@@ -101,10 +104,15 @@ export default function Register() {
           </span>
 
           <DatePicker
+            locale='es'
             placeholderText='Ingrese su fecha de nacimiento'
             selected={startDate}
             onChange={date => setStartDate(date)}
             className={styles.signupForm__birthday}
+            peekNextMonth
+            showMonthDropdown
+            showYearDropdown
+            dropdownMode='select'
           />
 
           <span className={styles.signup__label}>
