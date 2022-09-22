@@ -1,0 +1,12 @@
+.navbar{
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  width: 100%;
+  background: linear-gradient(273deg, rgba(98,68,119,) 30%, rgba(28,128,148) 100%);
+}
+
+.navbar__container {
+  background-color: rgba(255,255,255,0.8);
+  max-width: 700px;
+}

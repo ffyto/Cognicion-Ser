@@ -16,8 +16,8 @@ export default function Header() {
           <a>
             <Image
               src='/LOGO-colorsinfondo.png'
-              width={200}
-              height={200}
+              width={150}
+              height={150}
               alt='Cognición & Ser Logo'
               unoptimized={true}
             />
