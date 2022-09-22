@@ -1,8 +1,7 @@
 import Header from '../components/header';
-import styles from '../styles/pages/acerda-de.module.scss';
+import styles from '../styles/pages/acerca-de.module.scss';
 import Footer from '../components/footer';
 import Image from 'next/image';
-import Calendly from '../components/calendly';
 
 export default function About() {
   return (
@@ -32,7 +31,6 @@ export default function About() {
             />
           </div>
         </div>
-        <Calendly />
       </main>
       <Footer />
     </div>

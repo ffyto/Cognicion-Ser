@@ -1,9 +1,9 @@
-import { connect } from 'mongoose';
+import mongoose from 'mongoose';
+const URI = process.env.NEXT_PUBLIC_MONGO_URI;
 
-async function connectDb() {
-  const URI = process.env.MONGODB_URI;
+export default function connectDb() {
   try {
-    connect(URI);
+    mongoose.connect(URI);
 
     console.log('Connected to MongoDB!!');
   } catch (error) {
@@ -11,5 +11,3 @@ async function connectDb() {
     process.exit(1);
   }
 }
-
-export default connectDb;

@@ -1,5 +1,4 @@
 import Header from '../components/header';
-import Image from 'next/image';
 import styles from '../styles/pages/home.module.scss';
 import Link from 'next/link';
 import Footer from '../components/footer';
@@ -34,7 +33,7 @@ export default function Home() {
           <Link href='/solicitar-cita'>
             <a className={styles.card}>
               <h2>Separe su cita &rarr;</h2>
-              <p>Contrate nuestros servicios</p>
+              <p>Agende una cita con nuestros profesionales</p>
             </a>
           </Link>
 

@@ -1,10 +1,14 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
+import Swal from 'sweetalert2';
 import Header from '../components/header';
 import styles from '../styles/pages/login.module.scss';
 import Footer from '../components/footer';
 import Link from 'next/link';
+import { loginHandler } from '../services/auth';
 
-export default function Register() {
+export default function Login() {
+  const router = useRouter();
   const [form, setForm] = useState({});
 
   const handleChange = e => {
@@ -12,9 +16,34 @@ export default function Register() {
     setForm({ ...form, [name]: value });
   };
 
-  const handleLogin = e => {
+  const handleLogin = async e => {
     e.preventDefault();
-    // newUser();
+    fetchData();
+  };
+
+  const fetchData = async () => {
+    const response = await loginHandler(form.email, form.password);
+
+    const { profile, jwtoken, message } = response;
+
+    if (profile) {
+      localStorage.setItem('token', jwtoken);
+      localStorage.setItem('profile', JSON.stringify(profile));
+      Swal.fire({
+        title: message,
+        text: `Let's star organizing your ToDos!`,
+        icon: 'success',
+        confirmButtonText: `Let's go!`,
+      });
+      router.push(`/userhome/${profile.name}-${profile.lastName}`);
+    } else {
+      Swal.fire({
+        title: message,
+        text: 'Please, check that the introduced credentials are correct.',
+        icon: 'warning',
+        confirmButtonText: 'Ok',
+      });
+    }
   };
 
   return (
