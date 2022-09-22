@@ -158,6 +158,12 @@ opacity: 0.8;
   opacity: 0.8;
 }
 
+.signupForm__birthday::placeholder {
+  color: #cdd2d4;
+  font-style: italic;
+  opacity: 0.8;
+}
+
 .signupForm__button {
   margin-top: 20px;
   color: rgb(255, 255, 255);

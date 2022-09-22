@@ -10,9 +10,8 @@ import { loginHandler } from '../services/auth';
 export default function Login() {
   const router = useRouter();
   const [form, setForm] = useState();
-  console.log('🚀 ~ file: login.jsx ~ line 13 ~ Login ~ form', form);
 
-  const handleChange = e => {
+  const handleInput = e => {
     const { value, name } = e.target;
     setForm({ ...form, [name]: value });
   };
@@ -39,9 +38,9 @@ export default function Login() {
     } else {
       Swal.fire({
         title: message,
-        text: 'Please, check that the introduced credentials are correct.',
+        text: 'Por favor, verifique que las credenciales ingresadas son correctas.',
         icon: 'warning',
-        confirmButtonText: 'Ok',
+        confirmButtonText: 'Aceptar',
       });
     }
   };
@@ -50,29 +49,35 @@ export default function Login() {
     <div className={styles.container}>
       <main className={styles.main}>
         <Header />
-        <form className={styles.login__form} onSubmit={handleLogin}>
+        <form
+          className={styles.login__form}
+          onSubmit={handleLogin}
+          autoComplete='nope'
+        >
           <h1>Inicio de Sesión</h1>
           <span className={styles.login__label}>
             Email <span className={styles.login__label__span}>*</span>
           </span>
           <input
+            autoComplete='nope'
             className={styles.login__email}
             type='email'
             name='email'
             placeholder=' Ingrese su correo electrónico'
             required
-            onChange={handleChange}
+            onInput={handleInput}
           />
           <span className={styles.login__label}>
             Contraseña <span className={styles.login__label__span}>*</span>
           </span>
           <input
+            autoComplete='nope'
             className={styles.login__password}
             type='password'
             name='password'
             placeholder=' Digite una contraseña'
             required
-            onChange={handleChange}
+            onInput={handleInput}
           />
           <button type='submit' className={styles.login__button}>
             <b>Iniciar Sesión</b>{' '}

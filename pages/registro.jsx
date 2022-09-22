@@ -12,7 +12,7 @@ import Link from 'next/link';
 export default function Register() {
   const router = useRouter();
   const [form, setForm] = useState({});
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(null);
 
   const handleChange = e => {
     const { value, name } = e.target;
@@ -101,6 +101,7 @@ export default function Register() {
           </span>
 
           <DatePicker
+            placeholderText='Ingrese su fecha de nacimiento'
             selected={startDate}
             onChange={date => setStartDate(date)}
             className={styles.signupForm__birthday}
