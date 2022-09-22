@@ -30,7 +30,7 @@ export default function Login() {
       localStorage.setItem('token', jwtoken);
       localStorage.setItem('profile', JSON.stringify(profile));
       Swal.fire({
-        title: message,
+        title: `¡${message}`,
         icon: 'success',
         confirmButtonText: `Aceptar`,
       });
@@ -38,7 +38,6 @@ export default function Login() {
     } else {
       Swal.fire({
         title: message,
-        text: 'Por favor, verifique que las credenciales ingresadas son correctas.',
         icon: 'warning',
         confirmButtonText: 'Aceptar',
       });

@@ -26,7 +26,7 @@ function NavBar() {
             width={200}
             height={50}
             alt='Cognición & Ser Logo'
-            unoptimized={true}
+            quality={100}
           />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
@@ -34,8 +34,8 @@ function NavBar() {
           <Nav className='me-auto'>
             <Nav.Link href='/'>Inicio</Nav.Link>
             <Nav.Link href='/acerca-de'>Nosotros</Nav.Link>
-            <Nav.Link href='/contacto'>Contáctenos </Nav.Link>
             <Nav.Link href='/servicios'>Servicios</Nav.Link>
+            <Nav.Link href='/contacto'>Contáctenos </Nav.Link>
             {user ? (
               <NavDropdown title={user.name} id='basic-nav-dropdown'>
                 <NavDropdown.Item

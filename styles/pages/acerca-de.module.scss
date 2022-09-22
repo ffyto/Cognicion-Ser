@@ -1,5 +1,5 @@
 .container {
-  height: 100vh;
+  height: auto;
   display: block;
   text-align: center;
   flex-direction: column;
@@ -7,7 +7,7 @@
 }
 
 .main {
-  height: 90%;
+  height: auto;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -53,7 +53,7 @@
   margin: 7px 15px 8px;
   padding: 1.5rem;
   text-align: justify;
-  align-items:center;
+
   text-decoration: none;
   border: 1px solid rgba(28,128,148);
   border-radius: 10px;
@@ -74,8 +74,9 @@
     line-height: 1.5;
   }
 }
+
 .image {
-margin-top: 3px;
+  margin-top: 50px;
 }
 
 @media (max-width: 600px) {

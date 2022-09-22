@@ -21,12 +21,12 @@ export default function About() {
       });
       return;
     }
-    const { jwtoken, profile, message } = response;
+    const { jwtoken, profile } = response;
     localStorage.setItem('token', jwtoken);
     localStorage.setItem('profile', JSON.stringify(profile));
 
     Swal.fire({
-      title: message,
+      title: '¡Su cuenta ha sido activada satisfactoriamente!',
       icon: 'success',
       confirmButtonText: `Aceptar`,
     });
