@@ -2,7 +2,7 @@
   display: block;
   text-align: center;
   flex-direction: column;
-  background: linear-gradient(273deg, rgba(98,68,119,0.8) 30%, rgba(28,128,148,0.8) 100%);
+  background: linear-gradient(273deg, rgba(98,68,119) 30%, rgba(28,128,148) 100%);
 }
 
 .main {
@@ -21,16 +21,18 @@
 
 .login__form {
   display: block;
+  border-radius: 5px;
   padding: 10px;
   height: auto;
+  max-height: 400px;
   max-width: 350px;
   text-align: center;
   background-color: #ffffff;
   padding: 25px 40px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: auto;
-  margin-bottom: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
   justify-content: space-around;
   font-family: '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
@@ -56,6 +58,7 @@
     a {
       color: #0052cc;
       text-decoration: none;
+      font-size: small;
     }
 
   }
@@ -128,7 +131,7 @@ opacity: 0.8;
   background-color: rgb(28,128,148,0.8);
   border-radius: 5px;
   cursor: pointer;
-  padding: 10px 0 30px  0;
+  padding: 5px 0 30px  0;
 }
 
 .login__button:hover {
@@ -146,16 +149,23 @@ opacity: 0.8;
     text-align: center;
     background-color: #ffffff;
     border-radius: 5px;
-    padding: 30px 40px;
+    padding: 20px 40px;
     box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 5px;
-    margin-bottom: auto;
+    margin-bottom: 20px;
     justify-content: space-around;
     font-family: '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
       Ubuntu, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  }
+
+      a {
+        color: #0052cc;
+        text-decoration: none;
+        font-size: large;
+      }
+
+    }
 
   .card {
     display: flex;
@@ -176,7 +186,7 @@ opacity: 0.8;
   }
 
   .main {
-    height: auto;
+    height: 90vh;
     flex: 1;
     display: flex;
     flex-direction: column;

@@ -1,32 +1,37 @@
+import { useEffect, useState } from 'react';
 import Calendar from '../../components/calendar.jsx';
-import Header from '../../components/header';
+import NavBar from '../../components/navBar';
 import styles from '../../styles/pages/userhome.module.scss';
 import Footer from '../../components/footer';
 
 function UserHome() {
-  const profile = JSON.parse(localStorage.getItem('profile'));
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    setUser(profile);
+  }, []);
 
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <Header />
-
-        <p className={styles.description}>
-          Hola {profile.name} {profile.lastName}
-        </p>
-
-        <div className={styles.grid}>
-          <div className={styles.card}>
-            <p>
-              En este espacio, podrá verificar la disponibilidad de citas y
-              agendarlas por usted mismo.
-            </p>
+    <>
+      <NavBar />
+      <div className={styles.container}>
+        <main className={styles.main}>
+          <p className={styles.description}>
+            Hola {user.name} {user.lastName}
+          </p>
+          <div className={styles.grid}>
+            <div className={styles.card}>
+              <p>
+                En este espacio, podrá verificar la disponibilidad de citas y
+                agendarlas por usted mismo.
+              </p>
+            </div>
           </div>
-        </div>
-        <Calendar />
-      </main>
-      <Footer />
-    </div>
+          <Calendar />
+        </main>
+        <Footer />
+      </div>
+    </>
   );
 }
 

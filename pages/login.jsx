@@ -9,7 +9,8 @@ import { loginHandler } from '../services/auth';
 
 export default function Login() {
   const router = useRouter();
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState();
+  console.log('🚀 ~ file: login.jsx ~ line 13 ~ Login ~ form', form);
 
   const handleChange = e => {
     const { value, name } = e.target;
@@ -31,9 +32,8 @@ export default function Login() {
       localStorage.setItem('profile', JSON.stringify(profile));
       Swal.fire({
         title: message,
-        text: `Let's star organizing your ToDos!`,
         icon: 'success',
-        confirmButtonText: `Let's go!`,
+        confirmButtonText: `Aceptar`,
       });
       router.push(`/userhome/${profile.name}-${profile.lastName}`);
     } else {
