@@ -27,3 +27,19 @@ export function updateUser(id, user) {
 export function deleteUser(id) {
   return User.findByIdAndRemove(id);
 }
+
+export function addAppointmentToUser(id, appointmentId) {
+  return User.findByIdAndUpdate(
+    id,
+    { $push: { appointments: appointmentId } },
+    { new: true }
+  );
+}
+
+export function removeAppointmentToUser(id, appointmentId) {
+  return User.findByIdAndUpdate(
+    id,
+    { $pull: { appointments: appointmentId } },
+    { new: true }
+  );
+}

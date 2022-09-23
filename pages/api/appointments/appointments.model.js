@@ -27,6 +27,12 @@ const AppointmentSchema = new Schema(
     date: {
       type: Date,
     },
+    services: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Service',
+      },
+    ],
   },
   {
     timestamps: true,

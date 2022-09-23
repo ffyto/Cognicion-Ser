@@ -7,7 +7,7 @@ export default async function handler(req, res) {
 
   switch (method) {
     case 'GET': {
-      const { id } = req.params;
+      const { id } = req.query;
       try {
         const user = await getSingleUser(id);
         if (!user) {
@@ -19,9 +19,9 @@ export default async function handler(req, res) {
       }
     }
 
-    case 'POST': {
+    case 'PATCH': {
       const userUpdate = req.body;
-      const { id } = req.user;
+      const { id } = req.query;
       try {
         const user = await updateUser(id, userUpdate);
         console.log('User id:', id, 'Data updated:', userUpdate);

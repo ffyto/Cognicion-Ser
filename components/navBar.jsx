@@ -32,12 +32,24 @@ function NavBar() {
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='me-auto'>
-            <Nav.Link href='/'>Inicio</Nav.Link>
-            <Nav.Link href='/acerca-de'>Nosotros</Nav.Link>
-            <Nav.Link href='/servicios'>Servicios</Nav.Link>
-            <Nav.Link href='/contacto'>Contáctenos </Nav.Link>
+            <Nav.Link href='/' className={styles.navbar__element}>
+              Inicio
+            </Nav.Link>
+            <Nav.Link href='/acerca-de' className={styles.navbar__element}>
+              Nosotros
+            </Nav.Link>
+            <Nav.Link href='/servicios' className={styles.navbar__element}>
+              Servicios
+            </Nav.Link>
+            <Nav.Link href='/contacto' className={styles.navbar__element}>
+              Contáctenos{' '}
+            </Nav.Link>
             {user ? (
-              <NavDropdown title={user.name} id='basic-nav-dropdown'>
+              <NavDropdown
+                title={user.name}
+                id='basic-nav-dropdown'
+                className={styles.navbar__element}
+              >
                 <NavDropdown.Item
                   href={`/userhome/${user.name}-${user.lastName}`}
                 >
