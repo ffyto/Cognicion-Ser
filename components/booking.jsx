@@ -5,7 +5,7 @@ import { createAppointment } from '../services/appointments';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/router';
 
-function Booking({ isModalOpened, setIsModalOpened }) {
+function Booking() {
   const [step, setStep] = useState(0);
   const [pacient, setPacient] = useState({});
   const [date, setDate] = useState(null);
@@ -53,7 +53,7 @@ function Booking({ isModalOpened, setIsModalOpened }) {
             <>
               <div className={styles.form_body}>
                 <div className={styles.header}>
-                  <h3>Datos del Paciente</h3>
+                  <h4>Datos del Paciente</h4>
                   <span>{step_form}</span>
                 </div>
                 <div className={styles.form_data}>
@@ -110,7 +110,7 @@ function Booking({ isModalOpened, setIsModalOpened }) {
             <>
               <div className={styles.form_body}>
                 <div className={styles.header}>
-                  <h3>Elija un servicio</h3>
+                  <h4>Elija un servicio</h4>
                   <span>{step_form}</span>
                 </div>
                 <div className={styles.form_data}>
@@ -156,7 +156,7 @@ function Booking({ isModalOpened, setIsModalOpened }) {
             <>
               <div className={styles.form_body}>
                 <div className={styles.header}>
-                  <h3>Seleccione una fecha</h3>
+                  <h4>Seleccione una fecha</h4>
                   <span>{step_form}</span>
                 </div>
                 <div className={styles.form_data}>

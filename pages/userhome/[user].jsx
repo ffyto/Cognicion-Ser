@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 import NavBar from '../../components/navBar';
 import styles from '../../styles/pages/userhome.module.scss';
 import Footer from '../../components/footer';
-import Booking from '../../components/booking';
+import Modal from '../../components/modal';
 import Link from 'next/link';
 
 function UserHome() {
-  const [isModalOpened, setIsModalOpened] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
   const [user, setUser] = useState({});
 
   useEffect(() => {
@@ -33,7 +34,7 @@ function UserHome() {
             </small>
           </p>
           <div className={styles.grid}>
-            <button href='/acerca-de'>
+            <button href='/acerca-de' onClick={() => setShowModal(true)}>
               <a className={styles.card}>
                 <h2>Agendar Citas &rarr;</h2>
                 <p>Agende sus próximas citas</p>
@@ -47,7 +48,7 @@ function UserHome() {
               </a>
             </Link>
           </div>
-          <Booking />
+          <Modal onClose={() => setShowModal(false)} show={showModal} />
         </main>
         <Footer />
       </div>
