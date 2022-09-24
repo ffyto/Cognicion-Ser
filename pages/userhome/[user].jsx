@@ -3,6 +3,7 @@ import Calendar from '../../components/calendar.jsx';
 import NavBar from '../../components/navBar';
 import styles from '../../styles/pages/userhome.module.scss';
 import Footer from '../../components/footer';
+import Booking from '../../components/booking';
 
 function UserHome() {
   const [user, setUser] = useState({});
@@ -27,7 +28,7 @@ function UserHome() {
               </p>
             </div>
           </div>
-          <Calendar />
+          <Booking />
         </main>
         <Footer />
       </div>

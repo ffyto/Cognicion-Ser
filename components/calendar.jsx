@@ -8,8 +8,9 @@ import styles from '../styles/components/calendar.module.scss';
 
 registerLocale('es', es);
 
-function Calendar() {
-  const [startDate, setStartDate] = useState(null);
+function Calendar({ date, setDate }) {
+  console.log('🚀 ~ file: calendar.jsx ~ line 12 ~ Calendar ~ date', date);
+  const [startDate, setStartDate] = useState(date);
 
   const filterDays = date => {
     let nonAvailableDays = new Date();
@@ -52,13 +53,18 @@ function Calendar() {
     setHours(setMinutes(new Date('September 27, 2022 09:30:00'), 30), 9)
   );
 
+  const handleChange = date => {
+    setStartDate(date);
+    setDate(date);
+  };
+
   return (
     <div>
       <DatePicker
         locale='es'
-        placeholderText='Seleccione uno de los espacios disponibles...'
+        placeholderText='Fechas disponibles...'
         selected={startDate}
-        onChange={date => setStartDate(date)}
+        onChange={date => handleChange(date)}
         className={styles.calendar}
         showTimeSelect
         filterTime={filterPassedTime}

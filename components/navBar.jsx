@@ -62,7 +62,11 @@ function NavBar() {
                 </NavDropdown.Item>
               </NavDropdown>
             ) : (
-              <NavDropdown title='Usuario' id='basic-nav-dropdown'>
+              <NavDropdown
+                title='Usuario'
+                id='basic-nav-dropdown'
+                className={styles.navbar__element}
+              >
                 <NavDropdown.Item href='/login'>
                   Iniciar Sesión
                 </NavDropdown.Item>

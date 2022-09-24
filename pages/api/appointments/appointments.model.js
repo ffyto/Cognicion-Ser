@@ -17,15 +17,18 @@ const AppointmentSchema = new Schema(
       required: true,
     },
     pacient: {
-      type: { name: String, lastName: String, birthday: Date },
-      required: true,
+      name: { type: String },
+      lastName: { type: String },
+      age: { type: String },
     },
     professional: {
       type: Schema.Types.ObjectId,
       ref: 'User',
+      default: '632e044486dedbec9cdbc528',
     },
     date: {
       type: Date,
+      required: true,
     },
     services: [
       {
@@ -33,6 +36,10 @@ const AppointmentSchema = new Schema(
         ref: 'Service',
       },
     ],
+    payment: {
+      type: String,
+      default: 'pending',
+    },
   },
   {
     timestamps: true,

@@ -41,6 +41,10 @@ const UserSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    rol: {
+      type: String,
+      default: 'user',
+    },
     passwordResetActivationToken: String,
     passwordResetActivationExpires: Date,
   },
@@ -66,14 +70,14 @@ UserSchema.pre('save', async function save(next) {
 });
 
 UserSchema.virtual('profile').get(function profile() {
-  const { userName, name, lastName, email, avatar } = this;
+  const { name, lastName, email, avatar, rol } = this;
 
   return {
-    userName,
     name,
     lastName,
     email,
     avatar,
+    rol,
   };
 });
 

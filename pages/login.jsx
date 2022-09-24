@@ -34,7 +34,12 @@ export default function Login() {
         icon: 'success',
         confirmButtonText: `Aceptar`,
       });
-      router.push(`/userhome/${profile.name}-${profile.lastName}`);
+      if (profile.rol === 'user') {
+        router.push(`/userhome/${profile.name}-${profile.lastName}`);
+      }
+      if (profile.rol === 'professional') {
+        router.push(`/dashboard/${profile.name}-${profile.lastName}`);
+      }
     } else {
       Swal.fire({
         title: message,
