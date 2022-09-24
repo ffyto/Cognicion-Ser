@@ -17,20 +17,26 @@
   margin-left: auto;
   margin-right: auto;
   font-family: Alcubierre;
+
+  button {
+    background: none;
+    border: none;
+  }
 }
 
 .description {
   color: #624477;
   font-size: 1.5rem;
-  margin-top: 5px;
+  margin: 20px 40px 0 40px;
   font-family: Franklin Gothic Medium;
 }
 
 .grid {
+  margin-top: 30px;
+  margin-left: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
   max-width: 800px;
 }
 
@@ -45,8 +51,8 @@
   text-decoration: none;
   border: 1px solid rgba(28,128,148);
   border-radius: 10px;
-  width: 80%;
-  height: auto;
+  width: 280px;
+  height: 120px;
   background: white;
   box-shadow: 11px 10px 28px -8px rgba(0,0,0,0.75);
   font-family: Franklin Gothic Medium;
@@ -61,6 +67,12 @@
     font-size: 1rem;
     line-height: 1.5;
   }
+}
+
+.card:hover {
+  color: #624477;
+  transition-duration: 0.8s;
+  transform: scale(1.1);
 }
 
 

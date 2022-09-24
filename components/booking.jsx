@@ -5,7 +5,7 @@ import { createAppointment } from '../services/appointments';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/router';
 
-function Booking() {
+function Booking({ isModalOpened, setIsModalOpened }) {
   const [step, setStep] = useState(0);
   const [pacient, setPacient] = useState({});
   const [date, setDate] = useState(null);
@@ -177,25 +177,6 @@ function Booking() {
                 >
                   Separar Cita
                 </button>
-              </div>
-            </>
-          </div>
-        </div>
-      </div>
-    );
-  } else if (step == 3) {
-    return (
-      <div className={styles.form}>
-        <div className={styles.card}>
-          <div>
-            <>
-              <div className={styles.final}>
-                <div className={styles.final_content}>
-                  <span className={styles.check}>
-                    <i className='fa fa-check' />
-                  </span>
-                  <p></p>
-                </div>
               </div>
             </>
           </div>

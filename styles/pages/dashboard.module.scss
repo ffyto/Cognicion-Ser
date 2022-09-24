@@ -33,7 +33,6 @@
   grid-template-columns : 1fr 1fr;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
   max-width: 800px;
 }
 
@@ -70,7 +69,6 @@
   color: #624477;
   transition-duration: 0.8s;
   transform: scale(1.1);
-
 }
 
 @media (max-width: 600px) {
