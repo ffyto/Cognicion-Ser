@@ -53,7 +53,8 @@
   border-top: 1px solid #ccc;
   padding: 15px;
   display: flex;
-  gap: 10px
+  gap: 10px;
+  padding-left: 40px;
 }
 
 .footer button {
@@ -66,6 +67,12 @@
   color: #fff;
   border-radius: 3px
 }
+
+.footer button:hover {
+  background-color: rgb(40, 212, 106);
+  transition: 0.5s;
+}
+
 .input {
   background-color: #fff;
   color: black;
@@ -115,7 +122,8 @@
 .form_body {
   width: 100%;
   height: 250px;
-  padding: 15px
+  padding: 15px;
+  padding-left: 40px;
 }
 
 .final {

@@ -5,7 +5,7 @@ import { createAppointment } from '../services/appointments';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/router';
 
-function Booking() {
+function Booking({ setShowModal }) {
   const [step, setStep] = useState(0);
   const [pacient, setPacient] = useState({});
   const [date, setDate] = useState(null);
@@ -40,7 +40,9 @@ function Booking() {
       cancelButtonText: `Pagar después`,
     }).then(pagarAhora => {
       if (pagarAhora.isConfirmed) {
-        router.push(`/payments/${appointment.data._id}`);
+        router.push(`/payments/${appointment.data?._id}`);
+      } else if (pagarAhora.isDismissed) {
+        setShowModal(false);
       }
     });
   };

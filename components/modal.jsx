@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Booking from './booking';
 import styles from '../styles/components/modal.module.scss';
 
-const Modal = ({ show, onClose }) => {
+const Modal = ({ show, setShowModal }) => {
   const [isBrowser, setIsBrowser] = useState(false);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const Modal = ({ show, onClose }) => {
         </button>
 
         <StyledModalBody>
-          <Booking />
+          <Booking setShowModal={setShowModal} />
         </StyledModalBody>
       </StyledModal>
     </StyledModalOverlay>

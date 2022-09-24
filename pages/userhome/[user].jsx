@@ -48,7 +48,7 @@ function UserHome() {
               </a>
             </Link>
           </div>
-          <Modal onClose={() => setShowModal(false)} show={showModal} />
+          <Modal setShowModal={setShowModal} show={showModal} />
         </main>
         <Footer />
       </div>
