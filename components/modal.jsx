@@ -13,7 +13,7 @@ const Modal = ({ show, setShowModal }) => {
 
   const handleCloseClick = e => {
     e.preventDefault();
-    onClose();
+    setShowModal(false);
   };
 
   const modalContent = show ? (
