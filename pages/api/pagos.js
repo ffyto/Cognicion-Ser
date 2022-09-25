@@ -1,4 +1,8 @@
 export default function handler(req, res) {
-  console.log(req.body);
-  res.status(200).send('Pago recibido');
+  const { method } = req;
+
+  if (method === 'POST') {
+    console.log(req.body);
+    res.status(200).send('Pago recibido');
+  }
 }
