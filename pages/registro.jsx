@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import { getUserByEmail, createUser } from '../services/users';
 import { useRouter } from 'next/router';
 import DatePicker, { registerLocale } from 'react-datepicker';
@@ -9,6 +10,7 @@ import Header from '../components/header';
 import styles from '../styles/pages/registro.module.scss';
 import Footer from '../components/footer';
 import Link from 'next/link';
+
 
 registerLocale('es', es); // register it with the name you want
 
@@ -21,6 +23,7 @@ export default function Register() {
     const { value, name } = e.target;
     setForm({ ...form, [name]: value });
   };
+
 
   const newUser = async () => {
     const user = await getUserByEmail(form.email);
@@ -75,7 +78,6 @@ export default function Register() {
         <Header />
         <form className={styles.signupForm__form} onSubmit={handleSignUp}>
           <h1>Formulario de Registro</h1>
-
           <span className={styles.signup__label}>
             Nombre <span className={styles.signup__label__span}>*</span>
           </span>
@@ -94,6 +96,7 @@ export default function Register() {
             className={styles.signupForm__lastName}
             type='text'
             name='lastName'
+
             placeholder=' Ingrese sus apellidos'
             required
             onChange={handleChange}

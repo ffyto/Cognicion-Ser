@@ -2,6 +2,7 @@ import Header from '../components/header';
 import styles from '../styles/pages/contacto.module.scss';
 import Footer from '../components/footer';
 import Image from 'next/image';
+
 import NavBar from '../components/navBar';
 
 export default function Contact() {
@@ -66,5 +67,6 @@ export default function Contact() {
         <Footer />
       </div>
     </>
+
   );
 }

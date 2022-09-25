@@ -1,4 +1,5 @@
 import Header from '../components/header';
+
 import styles from '../styles/pages/acerca-de.module.scss';
 import Footer from '../components/footer';
 import Image from 'next/image';
@@ -87,5 +88,6 @@ export default function About() {
         <Footer />
       </div>
     </>
+
   );
 }
