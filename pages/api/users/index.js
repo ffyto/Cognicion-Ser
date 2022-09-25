@@ -41,7 +41,7 @@ export default async function handler(req, res) {
           dynamic_template_data: {
             name: user.name,
             lastName: user.lastName,
-            url: `${process.env.FRONTEND_URL}/activar-cuenta/${hash}`,
+            url: `${process.env.NEXT_PUBLIC_BASE_URL}/activar-cuenta/${hash}`,
           },
         };
 
