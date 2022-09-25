@@ -1,4 +1,4 @@
-import Appointment from './Appointments.model';
+import Appointment from './appointments.model';
 
 export function getAllAppointments() {
   return Appointment.find({});

@@ -3,7 +3,7 @@ import {
   getSingleAppointment,
   updateAppointment,
   deleteAppointment,
-} from './appointments.services';
+} from './appointments.service';
 import { removeAppointmentToUser } from '../users/users.service';
 
 export default async function handler(req, res) {
