@@ -38,7 +38,7 @@ const AppointmentSchema = new Schema(
     ],
     payment: {
       type: String,
-      default: 'pending',
+      default: 'Pendiente',
     },
   },
   {

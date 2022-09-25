@@ -12,3 +12,12 @@ export async function createAppointment(appointment) {
   });
   return response.text();
 }
+
+export async function getAllUserAppointments() {
+  const token = localStorage.getItem('token');
+  const response = await fetch(`${BASE_URL}/api/appointments/user`, {
+    method: 'GET',
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response.json();
+}

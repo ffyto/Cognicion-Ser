@@ -55,7 +55,11 @@ function NavBar() {
                 >
                   Mi Página
                 </NavDropdown.Item>
-                <NavDropdown.Item href='/registro'>Mis Citas</NavDropdown.Item>
+                <NavDropdown.Item
+                  href={`/mis-citas/${user.name}-${user.lastName}`}
+                >
+                  Mis Citas
+                </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href='/' onClick={closeSession}>
                   Cerrar Sesión

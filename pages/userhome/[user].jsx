@@ -7,7 +7,6 @@ import Link from 'next/link';
 
 function UserHome() {
   const [showModal, setShowModal] = useState(false);
-
   const [user, setUser] = useState({});
 
   useEffect(() => {
@@ -16,7 +15,7 @@ function UserHome() {
   }, []);
 
   const handleOpenModal = () => {
-    setIsModalOpened(true);
+    setShowModal(true);
   };
 
   return (
@@ -34,14 +33,14 @@ function UserHome() {
             </small>
           </p>
           <div className={styles.grid}>
-            <button href='/acerca-de' onClick={() => setShowModal(true)}>
+            <button href='/acerca-de' onClick={handleOpenModal}>
               <a className={styles.card}>
                 <h2>Agendar Citas &rarr;</h2>
                 <p>Agende sus próximas citas</p>
               </a>
             </button>
 
-            <Link href='/servicios'>
+            <Link href={`/mis-citas/${user.name}-${user.lastName}`}>
               <a className={styles.card}>
                 <h2>Mis Citas &rarr;</h2>
                 <p>Verifique sus citas ya agendadas</p>

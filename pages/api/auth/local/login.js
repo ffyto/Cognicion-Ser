@@ -1,7 +1,9 @@
 import { findUserByEmail } from '../../users/users.service';
 import { signToken } from '../auth.service';
+import connectDb from '../../connectDb';
 
 export default async function loginHandler(req, res) {
+  connectDb();
   const { email, password } = req.body;
 
   try {

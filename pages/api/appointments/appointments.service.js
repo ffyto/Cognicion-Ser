@@ -12,6 +12,13 @@ export function getSingleAppointment(id) {
   return Appointment.findById(id);
 }
 
+export function getAllUserAppointments(user) {
+  return Appointment.find({ user }).populate({
+    path: 'professional',
+    select: 'name lastName',
+  });
+}
+
 export function createAppointment(appointment) {
   return Appointment.create(appointment);
 }

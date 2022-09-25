@@ -1,7 +1,7 @@
 import connectDb from '../connectDb';
 import { createAppointment, getAllAppointments } from './appointments.service';
 import { addAppointmentToUser, findUserByEmail } from '../users/users.service';
-import { verifyToken } from '../auth/auth.service';
+import { isAuthenticated } from '../auth/auth.service';
 
 export default async function handler(req, res) {
   connectDb();
@@ -20,33 +20,20 @@ export default async function handler(req, res) {
     }
 
     case 'POST': {
-      const auth = req.headers?.authorization;
+      await isAuthenticated(req, res);
 
-      if (!auth) {
-        console.log('User Unauthorized');
-        return res.status(401).json({ message: 'Unauthorized' });
-      }
-      const token = auth.split(' ')[1];
-      const decoded = verifyToken(token);
-
-      if (!decoded) {
-        return res.status(401).json({ message: 'unAuthorized' });
-      }
-      const { email } = decoded;
-      const user = await findUserByEmail(email);
-
-      if (!user) {
-        return res.status(404).json({ message: 'User not found' });
+      if (!req.user) {
+        return res;
       }
 
-      console.log(`${user} authenticated`);
+      const { id } = req.user;
 
       let appointmentData = req.body;
-      appointmentData = { ...appointmentData, user: user.id };
+      appointmentData = { ...appointmentData, user: id };
 
       try {
         const appointment = await createAppointment(appointmentData);
-        await addAppointmentToUser(user.id, appointment.id);
+        await addAppointmentToUser(id, appointment.id);
         console.log('Appointment created successfully', appointment);
         return res.status(201).json({
           data: appointment,
