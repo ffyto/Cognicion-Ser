@@ -22,15 +22,17 @@
 .description {
   color: #624477;
   font-size: 1.5rem;
-  margin-top: 5px;
+  margin: 20px 40px 0 40px;
   font-family: Franklin Gothic Medium;
 }
 
 .grid {
-  display: flex;
+  margin-top: 30px;
+  margin-left: 20px;
+  display: grid;
+  grid-template-columns : 1fr 1fr;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
   max-width: 800px;
 }
 
@@ -61,20 +63,12 @@
     font-size: 1rem;
     line-height: 1.5;
   }
-
-  a{
-    font-size: larger;
-    color: rgba(28,128,148);
-    text-decoration: underline;
-  }
-
-  a:hover{
-    opacity: 0.6;
-    transition-duration: 0.2s;
-  }
 }
-.image {
-margin-top: 3px;
+
+.card:hover {
+  color: #624477;
+  transition-duration: 0.8s;
+  transform: scale(1.1);
 }
 
 @media (max-width: 600px) {

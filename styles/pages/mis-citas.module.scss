@@ -19,97 +19,65 @@
   font-family: Alcubierre;
 }
 
-.footer {
-  max-height: 10vh;
-  display: flex;
-  flex: 1;
-  padding: 2rem 0;
-  border-top: 1px solid #373737;
-  justify-content: center;
-  align-items: center;
-  font-family: Lucida Handwriting;
-}
-
 .description {
   color: #624477;
   font-size: 1.5rem;
-  margin-top: 5px;
+  margin: 20px 40px 0 40px;
   font-family: Franklin Gothic Medium;
 }
 
 .grid {
-  display: flex;
+  margin-top: 30px;
+  margin-left: 20px;
+  display: block;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
   max-width: 800px;
 }
 
 .card {
+  position: relative;
   display: flex;
   flex-direction: column;
+  color: #624477;
   margin: 7px 15px 8px;
   padding: 1.5rem;
-  text-align: left;
+  text-align: justify;
+  align-items:left;
   text-decoration: none;
   border: 1px solid rgba(28,128,148);
   border-radius: 10px;
-  width: 40%;
+  width: 100%;
   height: auto;
   background: white;
   box-shadow: 11px 10px 28px -8px rgba(0,0,0,0.75);
   font-family: Franklin Gothic Medium;
 
   h2 {
-    text-align: center;
     margin: 0 0 1rem 0;
     font-size: 1.2rem;
-    color: #624477;
-  }
-
-  ul {
-    list-style-type: "→";
-    padding: 0;
-  }
-
-  li {
-    text-align: left;
-    font-weight: bolder;
-    color: #000000;
-    margin-bottom: 13px;
-    margin-left: 5px;
-    font-family:Helvetica;
-  }
-
-  h3 {
-    margin: 0 0 1rem 0;
-    font-size: 1.1rem;
-    color: #000000;
   }
 
   p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5;
     text-align: left;
-    font-weight: bolder;
-    color: #000000;
-    margin-bottom: 5px;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+
+  small {
+    color: rgba(28,128,148);
   }
 }
 
-.service {
-  display: flex;
-  border: 5px solid rgba(28,128,148);
-  border-radius: 10px;
-  width: 90%;
-  margin-bottom: 20px;
-  align-items: center;
-  justify-content: space-around;
-  padding: 10px;
-  flex-wrap: wrap;
-}
+.payment__button {
+  position: absolute;
 
-.image {
-  border-radius: 5px;
+  bottom:   0;
+  right: 0;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  color: #624477;
 }
 
 @media (max-width: 600px) {

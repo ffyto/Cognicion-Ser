@@ -12,12 +12,12 @@ export default function Header() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <div className={styles.image}>
-        <Link href='/home'>
+        <Link href='/'>
           <a>
             <Image
               src='/LOGO-colorsinfondo.png'
-              width={200}
-              height={200}
+              width={150}
+              height={150}
               alt='Cognición & Ser Logo'
               unoptimized={true}
             />
