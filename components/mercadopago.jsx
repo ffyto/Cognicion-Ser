@@ -15,7 +15,7 @@ export default function Mercadopago({ preferenceId }) {
         autoOpen: true,
         render: {
           container: '.cho-container',
-          label: 'Pay',
+          label: 'Pagar',
         },
       });
     }

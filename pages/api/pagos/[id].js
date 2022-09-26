@@ -16,6 +16,8 @@ export default async function pagos(req, res) {
       return res;
     }
 
+    const user = req.user;
+
     const appointment = await getSingleAppointment(id);
 
     mercadopago.configure({
@@ -31,8 +33,9 @@ export default async function pagos(req, res) {
           quantity: 1,
         },
       ],
+      auto_return: 'approved',
       back_urls: {
-        success: `${BASE_URL}`,
+        success: `${BASE_URL}/userhome/${user.name}-${user.latName}`,
         failure: `${BASE_URL}/pagos/${id}`,
         pending: `${BASE_URL}/pagos/${id}`,
       },
