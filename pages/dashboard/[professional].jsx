@@ -6,10 +6,11 @@ import Footer from '../../components/footer';
 import Booking from '../../components/booking';
 
 function UserHome() {
-  const [user, setUser] = useState({});
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+  const [professional, setProfessional] = useState({});
   useEffect(() => {
     const profile = JSON.parse(localStorage.getItem('profile'));
-    setUser(profile);
+    setProfessional(profile);
   }, []);
 
   return (
@@ -19,7 +20,7 @@ function UserHome() {
         <main className={styles.main}>
           <Booking />
           <p className={styles.description}>
-            Hola {user.name} {user.lastName}
+            Hola {professional.name} {professional.lastName}
           </p>
 
           <p className={styles.description}>
@@ -37,7 +38,9 @@ function UserHome() {
               </a>
             </Link>
 
-            <Link href='/servicios'>
+            <Link
+              href={`${BASE_URL}/agenda/${professional.name}-${professional.lastName}`}
+            >
               <a className={styles.card}>
                 <h2>Verificar Citas &rarr;</h2>
                 <p>Verifique las citas que tiene asignadas</p>

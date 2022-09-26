@@ -9,7 +9,6 @@ import styles from '../styles/components/calendar.module.scss';
 registerLocale('es', es);
 
 function Calendar({ date, setDate }) {
-  console.log('🚀 ~ file: calendar.jsx ~ line 12 ~ Calendar ~ date', date);
   const [startDate, setStartDate] = useState(date);
 
   const filterDays = date => {

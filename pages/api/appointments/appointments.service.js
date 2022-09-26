@@ -9,13 +9,23 @@ export function findOneAppointment(query) {
 }
 
 export function getSingleAppointment(id) {
-  return Appointment.findById(id);
+  return Appointment.findById(id).populate({
+    path: 'user',
+    select: 'name lastName phoneNumber email',
+  });
 }
 
 export function getAllUserAppointments(user) {
   return Appointment.find({ user }).populate({
     path: 'professional',
     select: 'name lastName',
+  });
+}
+
+export function getAllProfessionalAppointments(professional) {
+  return Appointment.find({ professional }).populate({
+    path: 'user',
+    select: 'name lastName phoneNumber email',
   });
 }
 

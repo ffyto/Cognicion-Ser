@@ -22,7 +22,16 @@ export async function getAllUserAppointments() {
   return response.json();
 }
 
-export async function getSigleAppointment(id) {
+export async function getSingleAppointment(id) {
   const response = await fetch(`${BASE_URL}/api/appointments/${id}`);
+  return response.json();
+}
+
+export async function getAllProfessionalAppointments() {
+  const token = localStorage.getItem('token');
+  const response = await fetch(`${BASE_URL}/api/appointments/professional`, {
+    method: 'GET',
+    headers: { Authorization: `Bearer ${token}` },
+  });
   return response.json();
 }

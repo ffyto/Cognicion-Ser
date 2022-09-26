@@ -56,7 +56,11 @@ function NavBar() {
                   Mi Página
                 </NavDropdown.Item>
                 <NavDropdown.Item
-                  href={`/mis-citas/${user.name}-${user.lastName}`}
+                  href={
+                    user.rol === 'user'
+                      ? `/mis-citas/${user.name}-${user.lastName}`
+                      : `/agenda/${user.name}-${user.lastName}`
+                  }
                 >
                   Mis Citas
                 </NavDropdown.Item>
