@@ -40,3 +40,7 @@ export function updateAppointment(id, appointment) {
 export function deleteAppointment(id) {
   return Appointment.findByIdAndRemove(id);
 }
+
+export function findByPaymentIdAndupdateAppointment(paymentId, appointment) {
+  return Appointment.findOneAndUpdate(paymentId, appointment, { new: true });
+}

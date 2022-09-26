@@ -48,9 +48,8 @@ function Calendar({ date, setDate }) {
     }
   }
 
-  excludeTimes.push(
-    setHours(setMinutes(new Date('September 27, 2022 09:30:00'), 30), 9)
-  );
+  let excludeDates = [];
+  excludeDates.push(setHours(setMinutes(new Date(1665171000), 30), 14));
 
   const handleChange = date => {
     setStartDate(date);
@@ -70,6 +69,11 @@ function Calendar({ date, setDate }) {
         filterDate={filterDays}
         dateFormat='dd/MM/yyyy h:mm aa'
         excludeTimes={excludeTimes}
+        excludeDates={excludeDates}
+        fixedHeight
+        withPortal
+        isClearable
+        timeIntervals={60}
       />
     </div>
   );

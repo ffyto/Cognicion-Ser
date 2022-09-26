@@ -24,7 +24,7 @@ const AppointmentSchema = new Schema(
     professional: {
       type: Schema.Types.ObjectId,
       ref: 'User',
-      default: '632e044486dedbec9cdbc528',
+      default: '63320c6674834705d22f939a',
     },
     date: {
       type: Date,
@@ -34,7 +34,7 @@ const AppointmentSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'Service',
     },
-
+    paymentId: { type: String },
     payment: {
       type: String,
       default: 'Pendiente',

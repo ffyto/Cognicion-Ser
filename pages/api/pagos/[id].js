@@ -29,27 +29,26 @@ export default async function pagos(req, res) {
         {
           id: appointment.id,
           title: appointment.title,
-          unit_price: 5000,
+          unit_price: 500000,
           quantity: 1,
         },
       ],
-      auto_return: 'approved',
       back_urls: {
-        success: `${BASE_URL}/userhome/${user.name}-${user.latName}`,
-        failure: `${BASE_URL}/pagos/${id}`,
-        pending: `${BASE_URL}/pagos/${id}`,
+        success: `${BASE_URL}/userhome/${user.name}-${user.lastName}`,
+        failure: `${BASE_URL}/userhome/${user.name}-${user.lastName}`,
+        pending: `${BASE_URL}/userhome/${user.name}-${user.lastName}`,
       },
-      notification_url: `${BASE_URL}/api/pagos`,
+      auto_return: 'approved',
+      /*      notification_url: `${BASE_URL}/api/pagos`, */
       date_of_expiration: '2022-10-30T23:59:59.000-04:00',
     };
 
     mercadopago.preferences
       .create(preference)
       .then(function (response) {
-        console.log(preference);
         global.id = response.body.id;
         return res.status(200).json({
-          id: global.id,
+          id: response.body.id,
           data: preference,
           message: 'Puede proceder con el pago',
         });

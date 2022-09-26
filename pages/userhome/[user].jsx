@@ -1,18 +1,31 @@
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import NavBar from '../../components/navBar';
 import styles from '../../styles/pages/userhome.module.scss';
 import Footer from '../../components/footer';
 import Modal from '../../components/modal';
 import Link from 'next/link';
+import { findAppointmentByPaymentAndUpdate } from '../../services/appointments';
 
 function UserHome() {
   const [showModal, setShowModal] = useState(false);
   const [user, setUser] = useState({});
+  const router = useRouter();
+  const { preference_id, status } = router.query;
 
   useEffect(() => {
+    const paymentId = preference_id;
+    const appointmetUpdate = async () => {
+      await findAppointmentByPaymentAndUpdate(paymentId, {
+        payment: 'Pagado',
+      });
+    };
     const profile = JSON.parse(localStorage.getItem('profile'));
     setUser(profile);
-  }, []);
+    if (status === 'approved') {
+      appointmetUpdate();
+    }
+  }, [status]);
 
   const handleOpenModal = () => {
     setShowModal(true);
