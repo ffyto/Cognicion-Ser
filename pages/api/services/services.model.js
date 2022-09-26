@@ -24,7 +24,7 @@ const ServiceSchema = new Schema(
           type: Array,
         },
         sessions: {
-          type: String,
+          type: Number,
         },
       },
     ],

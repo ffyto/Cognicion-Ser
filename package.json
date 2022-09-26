@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "@sendgrid/mail": "^7.7.0",
+    "aws4": "^1.11.0",
     "bcrypt": "^5.0.1",
     "bootstrap": "^5.2.1",
     "date-fns": "^2.29.3",
     "dotenv": "^16.0.2",
     "jsonwebtoken": "^8.5.1",
+    "mercadopago": "^1.5.14",
     "mongoose": "^6.6.1",
     "next": "12.3.0",
     "react": "18.2.0",
@@ -22,6 +24,7 @@
     "react-calendly": "^4.1.0",
     "react-datepicker": "^4.8.0",
     "react-dom": "18.2.0",
+    "react-sdk-mercadopago": "^1.1.1",
     "styled-components": "^5.3.5",
     "sweetalert2": "^11.4.33"
   },

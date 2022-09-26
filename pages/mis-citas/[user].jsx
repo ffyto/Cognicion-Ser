@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import NavBar from '../../components/navBar';
 import styles from '../../styles/pages/mis-citas.module.scss';
 import Footer from '../../components/footer';
-import Link from 'next/link';
 import { getAllUserAppointments } from '../../services/appointments';
 
 function UserAppointments() {
@@ -67,7 +66,7 @@ function UserAppointments() {
                   </p>
                   {appointment.payment === 'Pendiente' ? (
                     <a
-                      href={`/payments/${appointment._id}`}
+                      href={`/pagos/${appointment._id}`}
                       className={styles.payment__button}
                       target='_blank'
                     >

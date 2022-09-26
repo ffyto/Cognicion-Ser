@@ -21,3 +21,8 @@ export async function getAllUserAppointments() {
   });
   return response.json();
 }
+
+export async function getSigleAppointment(id) {
+  const response = await fetch(`${BASE_URL}/api/appointments/${id}`);
+  return response.json();
+}

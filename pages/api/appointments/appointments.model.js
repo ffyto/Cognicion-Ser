@@ -30,12 +30,11 @@ const AppointmentSchema = new Schema(
       type: Date,
       required: true,
     },
-    services: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Service',
-      },
-    ],
+    service: {
+      type: Schema.Types.ObjectId,
+      ref: 'Service',
+    },
+
     payment: {
       type: String,
       default: 'Pendiente',
