@@ -51,7 +51,11 @@ function NavBar() {
                 className={styles.navbar__element}
               >
                 <NavDropdown.Item
-                  href={`/userhome/${user.name}-${user.lastName}`}
+                  href={
+                    user.rol === 'user'
+                      ? `/userhome/${user.name}-${user.lastName}`
+                      : `/dashboard/${user.name}-${user.lastName}`
+                  }
                 >
                   Mi Página
                 </NavDropdown.Item>

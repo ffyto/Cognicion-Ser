@@ -21,10 +21,10 @@ const ServiceSchema = new Schema(
           type: String,
         },
         description: {
-          type: Array,
+          type: String,
         },
         sessions: {
-          type: Number,
+          type: String,
         },
       },
     ],

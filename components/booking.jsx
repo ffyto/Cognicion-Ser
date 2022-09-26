@@ -40,7 +40,7 @@ function Booking({ setShowModal }) {
       cancelButtonText: `Pagar después`,
     }).then(pagarAhora => {
       if (pagarAhora.isConfirmed) {
-        router.push(`/payments/${appointment.data?._id}`);
+        router.push(`/pagos/${appointment.data?._id}`);
       } else if (pagarAhora.isDismissed) {
         setShowModal(false);
       }

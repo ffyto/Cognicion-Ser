@@ -76,7 +76,7 @@ function UserAppointments() {
                 </li>
               ))
             ) : (
-              <p>Cargando...</p>
+              <h2>Aún no tiene citas agendadas</h2>
             )}
           </div>
         </main>

@@ -3,22 +3,26 @@ import Link from 'next/link';
 import NavBar from '../../components/navBar';
 import styles from '../../styles/pages/dashboard.module.scss';
 import Footer from '../../components/footer';
+import ServiceModal from '../../components/serviceModal';
 import Booking from '../../components/booking';
 
 function UserHome() {
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+  const [showModal, setShowModal] = useState(false);
   const [professional, setProfessional] = useState({});
   useEffect(() => {
     const profile = JSON.parse(localStorage.getItem('profile'));
     setProfessional(profile);
   }, []);
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
 
   return (
     <>
       <NavBar />
       <div className={styles.container}>
         <main className={styles.main}>
-          <Booking />
           <p className={styles.description}>
             Hola {professional.name} {professional.lastName}
           </p>
@@ -31,12 +35,14 @@ function UserHome() {
           </p>
 
           <div className={styles.grid}>
-            <Link href='/acerca-de'>
-              <a className={styles.card}>
-                <h2>Crear Servicios &rarr;</h2>
-                <p>Agregue servicios para sus usuarios</p>
-              </a>
-            </Link>
+            <button
+              href='/acerca-de'
+              onClick={handleOpenModal}
+              className={styles.card}
+            >
+              <h2>Crear Servicios &rarr;</h2>
+              <p>Agregue servicios para sus usuarios</p>
+            </button>
 
             <Link
               href={`${BASE_URL}/agenda/${professional.name}-${professional.lastName}`}
@@ -47,6 +53,7 @@ function UserHome() {
               </a>
             </Link>
           </div>
+          <ServiceModal setShowModal={setShowModal} show={showModal} />
         </main>
         <Footer />
       </div>

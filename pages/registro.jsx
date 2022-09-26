@@ -1,18 +1,16 @@
 import { useState } from 'react';
-
 import { getUserByEmail, createUser } from '../services/users';
 import { useRouter } from 'next/router';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import es from 'date-fns/locale/es'; // the locale you want
+import es from 'date-fns/locale/es';
 import Swal from 'sweetalert2';
 import Header from '../components/header';
 import styles from '../styles/pages/registro.module.scss';
 import Footer from '../components/footer';
 import Link from 'next/link';
 
-
-registerLocale('es', es); // register it with the name you want
+registerLocale('es', es);
 
 export default function Register() {
   const router = useRouter();
@@ -23,7 +21,6 @@ export default function Register() {
     const { value, name } = e.target;
     setForm({ ...form, [name]: value });
   };
-
 
   const newUser = async () => {
     const user = await getUserByEmail(form.email);
@@ -43,6 +40,7 @@ export default function Register() {
       });
     } else {
       form.birthday = startDate;
+      console.log('🚀 ~ file: registro.jsx ~ line 43 ~ newUser ~ form', form);
       const response = await createUser(form);
       const res = JSON.parse(response);
       if (res.details) {
@@ -72,6 +70,13 @@ export default function Register() {
     newUser();
   };
 
+  const [mobile, setMobile] = useState('');
+
+  const numberHandler = val => {
+    const validatedValue = val.target.value.replace(/[^0-9]/g, '');
+    setMobile(validatedValue);
+  };
+
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -96,7 +101,6 @@ export default function Register() {
             className={styles.signupForm__lastName}
             type='text'
             name='lastName'
-
             placeholder=' Ingrese sus apellidos'
             required
             onChange={handleChange}
@@ -116,6 +120,19 @@ export default function Register() {
             showMonthDropdown
             showYearDropdown
             dropdownMode='select'
+          />
+          <span className={styles.signup__label}>
+            Número Celular <span className={styles.signup__label__span}>*</span>
+          </span>
+          <input
+            className={styles.signupForm__email}
+            type='tel'
+            name='phoneNumber'
+            placeholder=' Ingrese su número celular'
+            required
+            onInput={e => numberHandler(e)}
+            onChange={handleChange}
+            value={mobile}
           />
 
           <span className={styles.signup__label}>

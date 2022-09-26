@@ -1,27 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
-import styles from '../styles/components/userModal.module.scss';
-import { getSingleAppointment } from '../services/appointments';
+import CreateService from './createService';
+import styles from '../styles/components/modal.module.scss';
 
-const Modal = ({ show, setShowModal, appointmentId }) => {
+const ServiceModal = ({ show, setShowModal }) => {
   const [isBrowser, setIsBrowser] = useState(false);
-  const [appointment, setAppointment] = useState({});
-
-  const { user } = appointment;
-
-  const { pacient } = appointment;
 
   useEffect(() => {
-    const getAppointment = async () => {
-      const singleAppointment = await getSingleAppointment(appointmentId);
-      setAppointment(singleAppointment);
-    };
-    if (appointmentId) {
-      getAppointment();
-    }
     setIsBrowser(true);
-  }, [appointmentId]);
+  }, []);
 
   const handleCloseClick = e => {
     e.preventDefault();
@@ -40,24 +28,7 @@ const Modal = ({ show, setShowModal, appointmentId }) => {
         </button>
 
         <StyledModalBody>
-          {appointment.user ? (
-            <div className={styles.card}>
-              <h4>Información de Contacto</h4>
-              <p>
-                Usuario Solicitante: {user.name} {user.lastName}
-              </p>
-              <p>Teléfono: {user.phoneNumber} </p>
-              <p>Email: {user.email} </p>
-              <br />
-              <h4>Datos del Paciente</h4>
-              <p>
-                Nombre: {pacient.name} {pacient.lastName}
-              </p>
-              <p>Edad: {pacient.age} años</p>
-
-              <br />
-            </div>
-          ) : null}
+          <CreateService setShowModal={setShowModal} />
         </StyledModalBody>
       </StyledModal>
     </StyledModalOverlay>
@@ -85,13 +56,13 @@ const StyledModalHeader = styled.div`
 
 const StyledModal = styled.div`
   background: white;
-  width: auto;
-  height: auto;
+  width: 500px;
+  height: 600px;
   border-radius: 15px;
   padding: 15px;
 `;
 const StyledModalOverlay = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -102,4 +73,4 @@ const StyledModalOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-export default Modal;
+export default ServiceModal;
