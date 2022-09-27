@@ -137,7 +137,6 @@ class Calendar extends React.Component {
           minDate={new Date()}
           minTime={setHours(setMinutes(new Date(), 0), 8)}
           maxTime={setHours(setMinutes(new Date(), 0), 18)}
-          withPortal
           placeholderText='Seleccione una hora'
         />
       </div>
