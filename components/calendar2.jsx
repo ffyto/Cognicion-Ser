@@ -10,14 +10,6 @@ import { getAllNonAvailableHours } from '../services/nonAvailableHours';
 
 registerLocale('es', es);
 
-const arrDates = [
-  new Date(2022, 8, 30, 8, 15), //Thu May 20 2021 08:15:00
-  new Date(2022, 8, 30, 10, 0), //Fri May 20 2021 08:45:00
-  new Date(2021, 4, 21, 8, 30), //Sat May 21 2021 08:30:00
-  new Date(2021, 4, 21, 9, 0), //Sat May 21 2021 09:00:00
-  new Date(9, 0), //Sat May 21 2021 09:00:00
-];
-
 class Calendar extends React.Component {
   constructor(props) {
     super(props);
@@ -25,7 +17,28 @@ class Calendar extends React.Component {
       selectedTime: this.props.time,
       selectedDate: this.props.day,
       excludedTimes: [],
+      arrDates: [new Date(2022, 8, 30, 8, 15)],
     };
+  }
+
+  componentDidMount() {
+    const exclude = [];
+
+    const fetchData = async () => {
+      const nonAvailableHours = await getAllNonAvailableHours();
+      nonAvailableHours.map(nonAvailableHour => {
+        const year = parseInt(nonAvailableHour.day.split('/')[2]);
+        const month = parseInt(nonAvailableHour.day.split('/')[1]);
+        const day = parseInt(nonAvailableHour.day.split('/')[0]);
+        const hour = parseInt(nonAvailableHour.hour.split(':')[0]);
+        const minute = parseInt(nonAvailableHour.hour.split(':')[1]);
+        exclude.push(new Date(year, month - 1, day, hour, minute));
+      });
+    };
+    fetchData();
+    this.setState({
+      arrDates: exclude,
+    });
   }
 
   handleSelectedDate = date => {
@@ -50,12 +63,14 @@ class Calendar extends React.Component {
     });
 
     let arrSpecificDates = [];
-    for (let i = 0; i < arrDates.length; i++) {
+    for (let i = 0; i < this.state.arrDates.length; i++) {
       if (
         moment(date, moment.ISO_8601).format('YYYY/MM/DD') ===
-        moment(arrDates[i], moment.ISO_8601).format('YYYY/MM/DD')
+        moment(this.state.arrDates[i], moment.ISO_8601).format('YYYY/MM/DD')
       ) {
-        arrSpecificDates.push(moment(arrDates[i], moment.ISO_8601).toObject());
+        arrSpecificDates.push(
+          moment(this.state.arrDates[i], moment.ISO_8601).toObject()
+        );
       }
     }
 
