@@ -140,10 +140,18 @@ function Booking({ setShowModal }) {
                       <option value='' disabled hidden>
                         Servicios disponibles
                       </option>
-                      <option value='Opcion 1'>Opcion 1</option>
-                      <option value='Opcion 2'>Opcion 2</option>
-                      <option value='Opcion 3'>Opcion 3</option>
-                      <option value='Opcion 4'>Opcion 4</option>
+                      <option value='Evaluación neuropsicológica'>
+                        Evaluación neuropsicológica ($360.000)
+                      </option>
+                      <option value='Acompañamiento en cuidados'>
+                        Acompañamiento en cuidados ($510.000)
+                      </option>
+                      <option value='Orientación Docente'>
+                        Orientación Docente ($400.000)
+                      </option>
+                      <option value='Competencias Cognitivas'>
+                        Competencias Cognitivas ($600.000)
+                      </option>
                     </select>
                   </div>
                 </div>
