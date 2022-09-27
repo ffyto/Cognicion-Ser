@@ -39,9 +39,6 @@ function UserAppointments() {
         }, 2000);
       }
       setAppointments(userAppointments);
-      userAppointments.map(
-        appointment => (appointment.date = Date.parse(appointment.date))
-      );
     };
     const profile = JSON.parse(localStorage.getItem('profile'));
     setUser(profile);
@@ -70,13 +67,8 @@ function UserAppointments() {
                     <p>
                       Fecha de la cita:{' '}
                       <small>
-                        {new Date(appointment.date).toLocaleDateString(
-                          'default'
-                        )}
-                        , Hora:{' '}
-                        {new Date(appointment.date).toLocaleTimeString(
-                          'default'
-                        )}
+                        {appointment.date.appointmentDay}, Hora:{' '}
+                        {appointment.date.appointmentHour}
                       </small>
                     </p>
                     <p>

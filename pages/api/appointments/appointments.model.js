@@ -27,8 +27,8 @@ const AppointmentSchema = new Schema(
       default: '63320c6674834705d22f939a',
     },
     date: {
-      type: Date,
-      required: true,
+      appointmentDay: { type: String, required: true },
+      appointmentHour: { type: String, required: true },
     },
     service: {
       type: Schema.Types.ObjectId,

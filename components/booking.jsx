@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import styles from '../styles/components/booking.module.scss';
-import Calendar from './calendar';
+import Calendar from './calendar2';
 import { createAppointment } from '../services/appointments';
+import { createNonAvailableHour } from '../services/nonAvailableHours';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/router';
 
 function Booking({ setShowModal }) {
   const [step, setStep] = useState(0);
   const [pacient, setPacient] = useState({});
-  const [date, setDate] = useState(null);
+  const [day, setDay] = useState(null);
+  const [time, setTime] = useState(null);
   const [title, setTitle] = useState('');
   const router = useRouter();
   const step_form = step + 1;
@@ -28,7 +30,19 @@ function Booking({ setShowModal }) {
   };
 
   const handleAppointment = async () => {
-    let appointment = await createAppointment({ pacient, date, title });
+    const appointmentDay = new Date(day).toLocaleDateString('default');
+    const appointmentHour = new Date(time).toLocaleTimeString('default');
+    const date = { appointmentDay, appointmentHour };
+    let appointment = await createAppointment({
+      pacient,
+      date,
+      title,
+    });
+
+    await createNonAvailableHour({
+      day: appointmentDay,
+      hour: appointmentHour,
+    });
     appointment = JSON.parse(appointment);
 
     Swal.fire({
@@ -95,9 +109,9 @@ function Booking({ setShowModal }) {
                     <span>Edad</span>
                   </div>
                 </div>
-              </div>
-              <div className={styles.footer}>
-                <button type='submit'>Siguiente</button>
+                <div className={styles.footer__initial}>
+                  <button type='submit'>Siguiente</button>
+                </div>
               </div>
             </>
           </div>
@@ -162,7 +176,12 @@ function Booking({ setShowModal }) {
                   <span>{step_form}</span>
                 </div>
                 <div className={styles.form_data}>
-                  <Calendar date={date} setDate={setDate} />
+                  <Calendar
+                    day={day}
+                    setDay={setDay}
+                    time={time}
+                    setTime={setTime}
+                  />
                 </div>
               </div>
               <div className={styles.footer}>
@@ -174,7 +193,7 @@ function Booking({ setShowModal }) {
                   Anterior
                 </button>
                 <button
-                  disabled={date ? '' : 'disabled'}
+                  disabled={day || time ? '' : 'disabled'}
                   onClick={handleAppointment}
                 >
                   Separar Cita

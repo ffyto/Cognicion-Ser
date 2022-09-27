@@ -49,7 +49,7 @@ function Calendar({ date, setDate }) {
   }
 
   let excludeDates = [];
-  excludeDates.push(setHours(setMinutes(new Date(1665171000), 30), 14));
+  excludeTimes.push(setHours(setMinutes(new Date('2022-10-07T15:00'), 0), 15));
 
   const handleChange = date => {
     setStartDate(date);
@@ -64,16 +64,24 @@ function Calendar({ date, setDate }) {
         selected={startDate}
         onChange={date => handleChange(date)}
         className={styles.calendar}
-        showTimeSelect
         filterTime={filterPassedTime}
         filterDate={filterDays}
-        dateFormat='dd/MM/yyyy h:mm aa'
-        excludeTimes={excludeTimes}
+        dateFormat='dd/MM/yyyy'
         excludeDates={excludeDates}
         fixedHeight
         withPortal
         isClearable
         timeIntervals={60}
+      />
+      <DatePicker
+        excludeTimes={excludeTimes}
+        popperPlacement='top-start'
+        showTimeSelect
+        showTimeSelectOnly
+        timeIntervals={60}
+        timeFormat='HH:mm'
+        dateFormat='hh:mm aa'
+        minDate={new Date()}
       />
     </div>
   );
