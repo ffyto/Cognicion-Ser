@@ -18,7 +18,7 @@ function NavBar() {
   };
 
   return (
-    <Navbar expand='lg' className={styles.navbar}>
+    <Navbar expand='sm' className={styles.navbar}>
       <Container className={styles.navbar__container}>
         <Navbar.Brand href='/'>
           <Image

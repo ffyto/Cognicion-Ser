@@ -1,4 +1,5 @@
 .container {
+  min-height: 100vh;
   display: block;
   text-align: center;
   flex-direction: column;
@@ -6,6 +7,9 @@
 }
 
 .main {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  min-height: 75vh;
   height: auto;
   flex: 1;
   display: flex;
