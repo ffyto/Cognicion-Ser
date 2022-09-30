@@ -4,7 +4,6 @@ import NavBar from '../../components/navBar';
 import styles from '../../styles/pages/dashboard.module.scss';
 import Footer from '../../components/footer';
 import ServiceModal from '../../components/serviceModal';
-import Booking from '../../components/booking';
 
 function UserHome() {
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;

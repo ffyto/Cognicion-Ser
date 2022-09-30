@@ -23,7 +23,11 @@ export async function getAllUserAppointments() {
 }
 
 export async function getSingleAppointment(id) {
-  const response = await fetch(`${BASE_URL}/api/appointments/${id}`);
+  const token = localStorage.getItem('token');
+  const response = await fetch(`${BASE_URL}/api/appointments/${id}`, {
+    method: 'GET',
+    headers: { Authorization: `Bearer ${token}` },
+  });
   return response.json();
 }
 

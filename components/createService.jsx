@@ -1,18 +1,23 @@
 import { useState } from 'react';
 import styles from '../styles/components/createService.module.scss';
-// import { createService } from '../services/services';
+import { createService } from '../services/services';
 import Swal from 'sweetalert2';
-import { useRouter } from 'next/router';
+import { v4 as uuid } from 'uuid';
 
-function CreateService({ setShowModal }) {
+function ServiceCreation({ setShowModal }) {
   const [step, setStep] = useState(0);
   const [service, setService] = useState({ modality: '' });
-  const [includedService, setIncludedService] = useState({});
+  const [specificService, setSpecificService] = useState({});
+  const [includedServices, setIncludedServices] = useState([]);
+  console.log(
+    '🚀 ~ file: createService.jsx ~ line 11 ~ ServiceCreation ~ includedServices',
+    includedServices
+  );
   console.log(
     '🚀 ~ file: createService.jsx ~ line 13 ~ CreateService ~ includedService',
-    includedService
+    specificService
   );
-  const router = useRouter();
+
   const step_form = step + 1;
 
   const handleService = e => {
@@ -20,9 +25,12 @@ function CreateService({ setShowModal }) {
     setService({ ...service, [name]: value });
   };
 
-  const handleIncludedService = e => {
+  const handleSpecificService = e => {
     const { value, name } = e.target;
-    setIncludedService({ ...includedService, [name]: value });
+    setSpecificService({ ...specificService, [name]: value, id: uuid() });
+  };
+  const handleCreateSpecificService = () => {
+    setIncludedServices([...includedServices, specificService]);
   };
 
   const handleSubmit = e => {
@@ -31,49 +39,31 @@ function CreateService({ setShowModal }) {
     setStep(step + 1);
     if (step === 2) {
       async () => {
-        let service = await createService({
+        let newService = await createService({
           modality: service.modality,
           title: service.title,
           price: service.price,
           includedServices,
         });
-        service = JSON.parse(appointment);
+        newService = JSON.parse(appointment);
+
+        if (newService.error) {
+          Swal.fire({
+            title: `¡${newService.message}!`,
+            text: 'Intentelo de nuevo más tarde.',
+            icon: 'error',
+            confirmButtonText: `Aceptar`,
+          }).then(setShowModal(false));
+        }
 
         Swal.fire({
-          title: `¡${service.message}!`,
+          title: `¡${newService.message}!`,
           text: 'Ahora sus usuarios pueden ver y adquirir este servicio desde sus perfiles',
           icon: 'success',
-          confirmButtonText: `Pagar ahora`,
-          showCancelButton: true,
-          cancelButtonText: `Pagar después`,
+          confirmButtonText: `Aceptar`,
         }).then(setShowModal(false));
       };
     }
-  };
-
-  const handleCreateService = async () => {
-    let appointment = await createService({
-      modality: service.modality,
-      title: service.title,
-      price: service.price,
-      includedService,
-    });
-    appointment = JSON.parse(appointment);
-
-    Swal.fire({
-      title: `¡${appointment.message}!`,
-      text: 'Tenga en cuenta que debe realizar el pago de la misma con 48 horas de anticipación a la fecha separada, o la cita será cancelada.',
-      icon: 'success',
-      confirmButtonText: `Pagar ahora`,
-      showCancelButton: true,
-      cancelButtonText: `Pagar después`,
-    }).then(pagarAhora => {
-      if (pagarAhora.isConfirmed) {
-        router.push(`/pagos/${appointment.data?._id}`);
-      } else if (pagarAhora.isDismissed) {
-        setShowModal(false);
-      }
-    });
   };
 
   if (step == 0) {
@@ -128,6 +118,7 @@ function CreateService({ setShowModal }) {
                     <span>Precio</span>
                   </div>
                 </div>
+
                 <div className={styles.footer}>
                   <button type='submit'>Siguiente</button>
                 </div>
@@ -149,7 +140,7 @@ function CreateService({ setShowModal }) {
 
                   <span>{step_form}</span>
                 </div>
-                <p>Describa y enumere los servicios incluídos:</p>
+                <p>Describa y enumere los Sub-servicios incluídos:</p>
                 <div className={styles.form_data}>
                   <div className={styles.input_field}>
                     <input
@@ -157,8 +148,8 @@ function CreateService({ setShowModal }) {
                       name='name'
                       type='text'
                       required
-                      onChange={handleIncludedService}
-                      defaultValue={includedService.name}
+                      onChange={handleSpecificService}
+                      defaultValue={specificService.name}
                     />
                     <span>Nombre del Servicio</span>
                   </div>
@@ -168,10 +159,10 @@ function CreateService({ setShowModal }) {
                       name='sessions'
                       type='text'
                       required
-                      onChange={handleIncludedService}
-                      defaultValue={includedService.sessions}
+                      onChange={handleSpecificService}
+                      defaultValue={specificService.sessions}
                     />
-                    <span>Número de Servicio</span>
+                    <span>Número de Sesiones</span>
                   </div>
                   <div className={styles.input_field}>
                     <textarea
@@ -179,11 +170,33 @@ function CreateService({ setShowModal }) {
                       name='description'
                       type='text'
                       required
-                      onChange={handleIncludedService}
-                      defaultValue={includedService.description}
+                      onChange={handleSpecificService}
+                      defaultValue={specificService.description}
                       placeholder='Descripción del Servicio'
                     />
                   </div>
+                  {includedServices.length ? (
+                    <ul className={styles.includedServicesList}>
+                      <p>Servicios a Incluir:</p>
+                      {includedServices.map(includedService => (
+                        <li
+                          key={includedService.id}
+                          className={styles.includedService}
+                        >
+                          {includedService.name}
+                          <button
+                            className={styles.delete__button}
+                            type='button'
+                          >
+                            <i className='fa-solid fa-trash' />
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                  <button type='button' onClick={handleCreateSpecificService}>
+                    Agregar Sub-servicio
+                  </button>
                 </div>
                 <div className={styles.footer}>
                   <button
@@ -193,9 +206,7 @@ function CreateService({ setShowModal }) {
                   >
                     Anterior
                   </button>
-                  <button type='submit' onClick={handleCreateService}>
-                    Crear Servicio
-                  </button>
+                  <button type='submit'>Crear Servicio</button>
                 </div>
               </div>
             </>
@@ -206,4 +217,4 @@ function CreateService({ setShowModal }) {
   }
 }
 
-export default CreateService;
+export default ServiceCreation;

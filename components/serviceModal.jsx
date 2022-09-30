@@ -48,16 +48,11 @@ const StyledModalBody = styled.div`
   padding-top: 10px;
 `;
 
-const StyledModalHeader = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  font-size: 25px;
-`;
-
 const StyledModal = styled.div`
   background: white;
   width: 500px;
-  height: 600px;
+  height: auto;
+  min-height: 600px;
   border-radius: 15px;
   padding: 15px;
 `;
