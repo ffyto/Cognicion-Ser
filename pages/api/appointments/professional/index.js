@@ -12,7 +12,7 @@ export default async function getAllProfessionalAppointmentsHandler(req, res) {
   const { id } = req.user;
   try {
     const professionalAppointments = await getAllProfessionalAppointments(id);
-    console.log('Showing all Professional Appointments');
+    console.log('[SUCCESS]: Showing all Professional Appointments');
     return res.status(200).json(professionalAppointments);
   } catch (error) {
     console.error(`[ERROR]: ${error}`);

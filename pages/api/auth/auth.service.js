@@ -21,6 +21,7 @@ export async function isAuthenticated(req, res) {
   const auth = req.headers?.authorization;
 
   if (!auth) {
+    console.log(`[WARNING]: Unauthorized`);
     return res
       .status(401)
       .json({ message: '¡No está autorizado para realizar esta operación!' });
@@ -29,6 +30,7 @@ export async function isAuthenticated(req, res) {
   const decoded = verifyToken(token);
 
   if (!decoded) {
+    console.log(`[WARNING]: Unauthorized`);
     return res
       .status(401)
       .json({ message: '¡No está autorizado para realizar esta operación!' });
@@ -37,14 +39,10 @@ export async function isAuthenticated(req, res) {
   const user = await findUserByEmail(email);
 
   if (!user) {
+    console.log(`[WARNING]: User not found`);
     return res.status(404).json({ message: 'El usuario no existe' });
   }
   req.user = user;
-
-  console.log(
-    '🚀 ~ file: auth.services.js ~ line 49 ~ isAuthenticated ~ user',
-    user.id
-  );
 
   return null;
 }

@@ -4,10 +4,17 @@ import {
   updateService,
   deleteService,
 } from './services.service';
+import { isAuthenticated } from '../auth/auth.service';
 
 export default async function handler(req, res) {
   connectDb();
   const { method } = req;
+
+  await isAuthenticated(req, res);
+
+  if (!req.user) {
+    return res;
+  }
 
   switch (method) {
     case 'GET': {
@@ -15,10 +22,13 @@ export default async function handler(req, res) {
       try {
         const service = await getSingleService(id);
         if (!service) {
-          return res.status(404).json({ message: 'Service not found' });
+          console.log(`[WARNING]: Service not found`);
+          return res.status(404).json({ message: 'Servicio no encontrado' });
         }
-        return res.json(Service);
+        console.log(`[SUCCESS]: Showing service ${service}`);
+        return res.json(service);
       } catch (error) {
+        console.error(`[ERROR]: ${error}`);
         return res.status(500).json({ error });
       }
     }
@@ -28,13 +38,20 @@ export default async function handler(req, res) {
       const { id } = req.query;
       try {
         const service = await updateService(id, serviceUpdate);
-        console.log('Service id:', id, 'Data updated:', serviceUpdate);
-        return res.status(200).json({ message: 'Service updated', service });
+        console.log(
+          '[SUCCESS]: Service updated. id:',
+          id,
+          'Data updated:',
+          serviceUpdate
+        );
+        return res
+          .status(200)
+          .json({ message: 'Servicio actualizado:', service });
       } catch (error) {
         console.error(`[ERROR]: ${error}`);
         return res
           .status(500)
-          .json({ message: 'Error updating Service', error });
+          .json({ message: 'Error al intentar actualizar el servicio', error });
       }
     }
 
@@ -42,8 +59,8 @@ export default async function handler(req, res) {
       const { id } = req.query;
       try {
         await deleteService(id);
-        console.log(`Service ${id} eliminated`);
-        return res.status(200).json({ message: 'Service eliminated' });
+        console.log(`[SUCCESS]: Service ${id} eliminated`);
+        return res.status(200).json({ message: 'Servicio eliminado' });
       } catch (error) {
         console.error(`[ERROR]: ${error}`);
         return res.status(500).json({ error });

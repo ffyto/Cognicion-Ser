@@ -1,4 +1,5 @@
 import connectDb from '../connectDb';
+import { isAuthenticated } from '../auth/auth.service';
 import {
   getSingleAppointment,
   updateAppointment,
@@ -10,6 +11,11 @@ import { removeAppointmentToUser } from '../users/users.service';
 export default async function handler(req, res) {
   connectDb();
   const { method } = req;
+  await isAuthenticated(req, res);
+
+  if (!req.user) {
+    return res;
+  }
 
   switch (method) {
     case 'GET': {
@@ -17,10 +23,14 @@ export default async function handler(req, res) {
       try {
         const appointment = await getSingleAppointment(id);
         if (!appointment) {
-          return res.status(404).json({ message: 'Appointment not found' });
+          console.log(`[WARNING]: Appointment not found`);
+          return res
+            .status(404)
+            .json({ message: 'La cita solicitada no fue encontrada' });
         }
         return res.json(appointment);
       } catch (error) {
+        console.error(`[ERROR]: ${error}`);
         return res.status(500).json({ error });
       }
     }
@@ -30,15 +40,20 @@ export default async function handler(req, res) {
       const { id } = req.query;
       try {
         const appointment = await updateAppointment(id, appointmentUpdate);
-        console.log('Appointment id:', id, 'Data updated:', appointmentUpdate);
+        console.log(
+          '[SUCCESS]: Appointment id:',
+          id,
+          'Data updated:',
+          appointmentUpdate
+        );
         return res
           .status(200)
-          .json({ message: 'Appointment updated', appointment });
+          .json({ message: 'La cita fue actualizada', appointment });
       } catch (error) {
         console.error(`[ERROR]: ${error}`);
         return res
           .status(500)
-          .json({ message: 'Error updating Appointment', error });
+          .json({ message: 'Error al intentar actualizar la cita:', error });
       }
     }
 
@@ -52,7 +67,7 @@ export default async function handler(req, res) {
           appointmentUpdate
         );
         console.log(
-          'Appointment id:',
+          '[SUCCESS]: Appointment id:',
           appointment.id,
           'Payment id:',
           id,
@@ -61,12 +76,12 @@ export default async function handler(req, res) {
         );
         return res
           .status(200)
-          .json({ message: 'Appointment updated', appointment });
+          .json({ message: 'La cita fue actualizada', appointment });
       } catch (error) {
         console.error(`[ERROR]: ${error}`);
         return res
           .status(500)
-          .json({ message: 'Error updating Appointment', error });
+          .json({ message: 'Error al intentar actualizar la cita:', error });
       }
     }
 
@@ -76,13 +91,15 @@ export default async function handler(req, res) {
       try {
         const appointment = await getSingleAppointment(id);
         if (!appointment) {
-          console.log('Appointment not found');
-          return res.status(404).json({ message: 'Appointment not found' });
+          console.log('[WARNING]: Appointment not found');
+          return res
+            .status(404)
+            .json({ message: 'La cita solicitada no fue encontrada' });
         }
         await removeAppointmentToUser(user.id, id);
         await deleteAppointment(id);
-        console.log(`Appointment ${id} eliminated`);
-        return res.status(200).json({ message: 'Appointment eliminated' });
+        console.log(`[SUCCESS]: Appointment ${id} eliminated`);
+        return res.status(200).json({ message: 'La cita fue eliminada' });
       } catch (error) {
         console.error(`[ERROR]: ${error}`);
         return res.status(500).json({ error });

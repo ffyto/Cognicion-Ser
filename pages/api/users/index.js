@@ -2,6 +2,8 @@ import crypto from 'crypto';
 import connectDb from '../connectDb';
 import { createUser, getAllUsers } from './users.service';
 import { sendMail } from '../../../utils/mail';
+import { isAuthenticated } from '../auth/auth.service';
+import { registerLogin } from './user.joiSchema';
 
 export default async function handler(req, res) {
   connectDb();
@@ -9,17 +11,36 @@ export default async function handler(req, res) {
 
   switch (method) {
     case 'GET': {
-      try {
-        console.log('Showing all users');
-        const users = await getAllUsers();
-        return res.status(200).json(users);
-      } catch (error) {
-        console.error(`[ERROR]: ${error}`);
-        return res.status(500).json({ error });
+      await isAuthenticated(req, res);
+
+      if (!req.user) {
+        return res;
+      }
+
+      if (req.user.rol === 'professional') {
+        try {
+          console.log('[SUCCESS]: Showing all users');
+          const users = await getAllUsers();
+          return res.status(200).json(users);
+        } catch (error) {
+          console.error(`[ERROR]: ${error}`);
+          return res.status(500).json({ error });
+        }
+      } else {
+        console.log(`[WARNING]: Unauthorized`);
+        return res.status(401).json({
+          message: '¡No está autorizado para realizar esta operación!',
+        });
       }
     }
 
     case 'POST': {
+      registerLogin(req, res);
+
+      if (res.statusCode === 400) {
+        return res;
+      }
+
       const userData = req.body;
       try {
         const hash = crypto
@@ -47,7 +68,7 @@ export default async function handler(req, res) {
 
         await sendMail(message);
 
-        console.log('User created successfully', user);
+        console.log('[SUCCESS]: User created successfully', user);
         return res.status(201).json(user.profile);
       } catch (error) {
         console.error(`[ERROR]: ${error}`);

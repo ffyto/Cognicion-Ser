@@ -8,10 +8,10 @@ export default async function handler(req, res) {
     const user = await findUserByEmail(email);
 
     if (!user) {
-      console.log('User not found');
-      return res.status(404).json({ message: 'User not found' });
+      console.log('[WARNING]: User not found');
+      return res.status(404).json({ message: 'Usuario no encontrado' });
     }
-    console.log('Showing user', user);
+    console.log('[SUCCESS]: Showing user', user);
     return res.json(user);
   } catch (error) {
     console.error(`[ERROR]: ${error}`);

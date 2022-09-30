@@ -27,26 +27,41 @@ export default function Register() {
 
     if (user.email) {
       Swal.fire({
-        title: 'Este email ya está registrado!',
+        title: '¡Este email ya está registrado!',
         text: 'Por favor, introduzca otro email o incie sesión.',
         icon: 'warning',
         confirmButtonText: 'Aceptar',
       });
     } else if (form.password !== form.confirmPassword) {
       Swal.fire({
-        title: 'Las contraseñas ingresadas no coinciden!',
+        title: '¡Las contraseñas ingresadas no coinciden!',
         text: 'La contraseña y su confirmación deben ser iguales.',
         confirmButtonText: 'Aceptar',
       });
     } else {
       form.birthday = startDate;
-      console.log('🚀 ~ file: registro.jsx ~ line 43 ~ newUser ~ form', form);
       const response = await createUser(form);
       const res = JSON.parse(response);
       if (res.details) {
-        if (res.details[0].message.includes('password')) {
-          res.details[0].message = `Password needs to be at least 6 characters long and include only alphanumeric!`;
+        if (res.details[0].message.includes('name')) {
+          res.details[0].message = `¡El nombre ingresado debe tener una longitud de entre 2 y 20 caracteres!`;
         }
+        if (res.details[0].message.includes('lastName')) {
+          res.details[0].message = `¡El Apellido o apellidos ingresados deben tener una longitud de entre 2 y 30 caracteres!`;
+        }
+        if (res.details[0].message.includes('age')) {
+          res.details[0].message = `¡Debe ser mayor de edad para registrarse!`;
+        }
+        if (res.details[0].message.includes('phoneNumber')) {
+          res.details[0].message = `¡El número celular debe tener una longitid de exactamente 10 caracteres!`;
+        }
+        if (res.details[0].message.includes('email')) {
+          res.details[0].message = `¡El email ingresado no es válido!`;
+        }
+        if (res.details[0].message.includes('password')) {
+          res.details[0].message = `¡La contraseña debe tener una longitud de entre 8 y 15 caracteres, y debe incluir al menos una letra mayúscula y una minúscula, un caracter especial y un número!`;
+        }
+
         Swal.fire({
           title: res.details[0].message,
           icon: 'warning',
