@@ -3,20 +3,14 @@ import styles from '../styles/components/createService.module.scss';
 import { createService } from '../services/services';
 import Swal from 'sweetalert2';
 import { v4 as uuid } from 'uuid';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 function ServiceCreation({ setShowModal }) {
   const [step, setStep] = useState(0);
   const [service, setService] = useState({ modality: '' });
-  const [specificService, setSpecificService] = useState({});
+  const [subService, setSubService] = useState({});
   const [includedServices, setIncludedServices] = useState([]);
-  console.log(
-    '🚀 ~ file: createService.jsx ~ line 11 ~ ServiceCreation ~ includedServices',
-    includedServices
-  );
-  console.log(
-    '🚀 ~ file: createService.jsx ~ line 13 ~ CreateService ~ includedService',
-    specificService
-  );
 
   const step_form = step + 1;
 
@@ -25,45 +19,75 @@ function ServiceCreation({ setShowModal }) {
     setService({ ...service, [name]: value });
   };
 
-  const handleSpecificService = e => {
+  const handleSubService = e => {
     const { value, name } = e.target;
-    setSpecificService({ ...specificService, [name]: value, id: uuid() });
+    setSubService({ ...subService, [name]: value, id: uuid() });
   };
-  const handleCreateSpecificService = () => {
-    setIncludedServices([...includedServices, specificService]);
+
+  const handleCreateSubService = () => {
+    if (subService.name && subService.sessions && subService.description) {
+      setIncludedServices([...includedServices, subService]);
+      document.getElementById('subService.name').value = '';
+      document.getElementById('subService.sessions').value = '';
+      document.getElementById('subService.description').value = '';
+      setSubService({});
+    }
+  };
+
+  const handleDeleteSubService = id => {
+    const newIncludedServices = includedServices.filter(
+      subService => subService.id !== id
+    );
+    setIncludedServices(newIncludedServices);
+  };
+
+  const handleCreateService = async () => {
+    if (!includedServices.length) {
+      Swal.fire({
+        title: `¡Debe agregar por lo menos un Sub-servicio!`,
+        icon: 'warning',
+        confirmButtonText: `Aceptar`,
+      });
+      return;
+    }
+
+    let newService = await createService({
+      modality: service.modality,
+      title: service.title,
+      price: service.price,
+      includedServices,
+    });
+
+    newService = JSON.parse(newService);
+
+    if (newService.error) {
+      Swal.fire({
+        title: `¡${newService.message}!`,
+        text: 'Intentelo de nuevo más tarde.',
+        icon: 'error',
+        confirmButtonText: `Aceptar`,
+      });
+    }
+
+    if (newService.message.includes('autorizado')) {
+      Swal.fire({
+        title: `¡${newService.message}!`,
+        icon: 'warning',
+        confirmButtonText: `Aceptar`,
+      }).then(setShowModal(false));
+    } else {
+      Swal.fire({
+        title: `¡${newService.message}!`,
+        text: 'Ahora sus usuarios pueden ver y adquirir este servicio desde sus perfiles.',
+        icon: 'success',
+        confirmButtonText: `Aceptar`,
+      }).then(setShowModal(false));
+    }
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-
     setStep(step + 1);
-    if (step === 2) {
-      async () => {
-        let newService = await createService({
-          modality: service.modality,
-          title: service.title,
-          price: service.price,
-          includedServices,
-        });
-        newService = JSON.parse(appointment);
-
-        if (newService.error) {
-          Swal.fire({
-            title: `¡${newService.message}!`,
-            text: 'Intentelo de nuevo más tarde.',
-            icon: 'error',
-            confirmButtonText: `Aceptar`,
-          }).then(setShowModal(false));
-        }
-
-        Swal.fire({
-          title: `¡${newService.message}!`,
-          text: 'Ahora sus usuarios pueden ver y adquirir este servicio desde sus perfiles',
-          icon: 'success',
-          confirmButtonText: `Aceptar`,
-        }).then(setShowModal(false));
-      };
-    }
   };
 
   if (step == 0) {
@@ -140,7 +164,7 @@ function ServiceCreation({ setShowModal }) {
 
                   <span>{step_form}</span>
                 </div>
-                <p>Describa y enumere los Sub-servicios incluídos:</p>
+                <p>Describa los Sub-servicios incluídos:</p>
                 <div className={styles.form_data}>
                   <div className={styles.input_field}>
                     <input
@@ -148,10 +172,11 @@ function ServiceCreation({ setShowModal }) {
                       name='name'
                       type='text'
                       required
-                      onChange={handleSpecificService}
-                      defaultValue={specificService.name}
+                      onChange={handleSubService}
+                      defaultValue={subService.name}
+                      id='subService.name'
                     />
-                    <span>Nombre del Servicio</span>
+                    <span>Nombre del Sub-servicio</span>
                   </div>
                   <div className={styles.input_field}>
                     <input
@@ -159,8 +184,9 @@ function ServiceCreation({ setShowModal }) {
                       name='sessions'
                       type='text'
                       required
-                      onChange={handleSpecificService}
-                      defaultValue={specificService.sessions}
+                      onChange={handleSubService}
+                      defaultValue={subService.sessions}
+                      id='subService.sessions'
                     />
                     <span>Número de Sesiones</span>
                   </div>
@@ -170,9 +196,10 @@ function ServiceCreation({ setShowModal }) {
                       name='description'
                       type='text'
                       required
-                      onChange={handleSpecificService}
-                      defaultValue={specificService.description}
-                      placeholder='Descripción del Servicio'
+                      onChange={handleSubService}
+                      defaultValue={subService.description}
+                      placeholder='Descripción del Sub-servicio'
+                      id='subService.description'
                     />
                   </div>
                   {includedServices.length ? (
@@ -187,16 +214,25 @@ function ServiceCreation({ setShowModal }) {
                           <button
                             className={styles.delete__button}
                             type='button'
+                            onClick={() =>
+                              handleDeleteSubService(includedService.id)
+                            }
                           >
-                            <i className='fa-solid fa-trash' />
+                            <FontAwesomeIcon icon={faTrash} />
                           </button>
                         </li>
                       ))}
                     </ul>
                   ) : null}
-                  <button type='button' onClick={handleCreateSpecificService}>
-                    Agregar Sub-servicio
-                  </button>
+                  <section className={styles.addSubService__button__section}>
+                    <button
+                      type='button'
+                      onClick={handleCreateSubService}
+                      className={styles.addSubService__button}
+                    >
+                      Agregar Sub-servicio
+                    </button>
+                  </section>
                 </div>
                 <div className={styles.footer}>
                   <button
@@ -206,7 +242,9 @@ function ServiceCreation({ setShowModal }) {
                   >
                     Anterior
                   </button>
-                  <button type='submit'>Crear Servicio</button>
+                  <button type='button' onClick={handleCreateService}>
+                    Crear Servicio
+                  </button>
                 </div>
               </div>
             </>
