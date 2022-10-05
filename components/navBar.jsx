@@ -18,7 +18,7 @@ function NavBar() {
   };
 
   return (
-    <Navbar expand='lg' className={styles.navbar}>
+    <Navbar expand='sm' className={styles.navbar}>
       <Container className={styles.navbar__container}>
         <Navbar.Brand href='/'>
           <Image
@@ -51,12 +51,20 @@ function NavBar() {
                 className={styles.navbar__element}
               >
                 <NavDropdown.Item
-                  href={`/userhome/${user.name}-${user.lastName}`}
+                  href={
+                    user.rol === 'user'
+                      ? `/userhome/${user.name}-${user.lastName}`
+                      : `/dashboard/${user.name}-${user.lastName}`
+                  }
                 >
                   Mi Página
                 </NavDropdown.Item>
                 <NavDropdown.Item
-                  href={`/mis-citas/${user.name}-${user.lastName}`}
+                  href={
+                    user.rol === 'user'
+                      ? `/mis-citas/${user.name}-${user.lastName}`
+                      : `/agenda/${user.name}-${user.lastName}`
+                  }
                 >
                   Mis Citas
                 </NavDropdown.Item>

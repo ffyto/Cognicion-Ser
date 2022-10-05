@@ -3,23 +3,27 @@ import Link from 'next/link';
 import NavBar from '../../components/navBar';
 import styles from '../../styles/pages/dashboard.module.scss';
 import Footer from '../../components/footer';
-import Booking from '../../components/booking';
+import ServiceModal from '../../components/serviceModal';
 
 function UserHome() {
-  const [user, setUser] = useState({});
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+  const [showModal, setShowModal] = useState(false);
+  const [professional, setProfessional] = useState({});
   useEffect(() => {
     const profile = JSON.parse(localStorage.getItem('profile'));
-    setUser(profile);
+    setProfessional(profile);
   }, []);
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
 
   return (
     <>
       <NavBar />
       <div className={styles.container}>
         <main className={styles.main}>
-          <Booking />
           <p className={styles.description}>
-            Hola {user.name} {user.lastName}
+            Hola {professional.name} {professional.lastName}
           </p>
 
           <p className={styles.description}>
@@ -30,20 +34,25 @@ function UserHome() {
           </p>
 
           <div className={styles.grid}>
-            <Link href='/acerca-de'>
-              <a className={styles.card}>
-                <h2>Crear Servicios &rarr;</h2>
-                <p>Agregue servicios para sus usuarios</p>
-              </a>
-            </Link>
+            <button
+              href='/acerca-de'
+              onClick={handleOpenModal}
+              className={styles.card}
+            >
+              <h2>Crear Servicios &rarr;</h2>
+              <p>Agregue servicios para sus usuarios</p>
+            </button>
 
-            <Link href='/servicios'>
+            <Link
+              href={`${BASE_URL}/agenda/${professional.name}-${professional.lastName}`}
+            >
               <a className={styles.card}>
                 <h2>Verificar Citas &rarr;</h2>
                 <p>Verifique las citas que tiene asignadas</p>
               </a>
             </Link>
           </div>
+          <ServiceModal setShowModal={setShowModal} show={showModal} />
         </main>
         <Footer />
       </div>

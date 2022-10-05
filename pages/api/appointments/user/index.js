@@ -12,7 +12,7 @@ export default async function getAllUserAppointmentsHandler(req, res) {
   const { id } = req.user;
   try {
     const userAppointments = await getAllUserAppointments(id);
-    console.log('Showing all User boards');
+    console.log('[SUCCESS]: Showing all User Appointments');
     return res.status(200).json(userAppointments);
   } catch (error) {
     console.error(`[ERROR]: ${error}`);

@@ -33,12 +33,12 @@ export default async function loginHandler(req, res) {
       });
     }
 
-    const jwtoken = await signToken({ email: user.email });
+    const jwtoken = signToken({ email: user.email });
     console.log('Successful login', user);
     return res.json({
       jwtoken,
       profile: user.profile,
-      message: 'Bienvenido!',
+      message: 'Bienvenido(a)!',
     });
   } catch (error) {
     console.error(`[ERROR]: ${error}`);

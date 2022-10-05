@@ -9,7 +9,6 @@ import styles from '../styles/components/calendar.module.scss';
 registerLocale('es', es);
 
 function Calendar({ date, setDate }) {
-  console.log('🚀 ~ file: calendar.jsx ~ line 12 ~ Calendar ~ date', date);
   const [startDate, setStartDate] = useState(date);
 
   const filterDays = date => {
@@ -49,9 +48,8 @@ function Calendar({ date, setDate }) {
     }
   }
 
-  excludeTimes.push(
-    setHours(setMinutes(new Date('September 27, 2022 09:30:00'), 30), 9)
-  );
+  let excludeDates = [];
+  excludeTimes.push(setHours(setMinutes(new Date('2022-10-07T15:00'), 0), 15));
 
   const handleChange = date => {
     setStartDate(date);
@@ -66,11 +64,24 @@ function Calendar({ date, setDate }) {
         selected={startDate}
         onChange={date => handleChange(date)}
         className={styles.calendar}
-        showTimeSelect
         filterTime={filterPassedTime}
         filterDate={filterDays}
-        dateFormat='dd/MM/yyyy h:mm aa'
+        dateFormat='dd/MM/yyyy'
+        excludeDates={excludeDates}
+        fixedHeight
+        withPortal
+        isClearable
+        timeIntervals={60}
+      />
+      <DatePicker
         excludeTimes={excludeTimes}
+        popperPlacement='top-start'
+        showTimeSelect
+        showTimeSelectOnly
+        timeIntervals={60}
+        timeFormat='HH:mm'
+        dateFormat='hh:mm aa'
+        minDate={new Date()}
       />
     </div>
   );
