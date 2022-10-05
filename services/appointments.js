@@ -57,7 +57,6 @@ export async function findAppointmentByPaymentAndUpdate(
   paymentId,
   appointmentUpdate
 ) {
-  console.log('🚀 ~ file: appointments.js ~ line 57 ~ paymentId', paymentId);
   const token = localStorage.getItem('token');
   const response = await fetch(`${BASE_URL}/api/appointments/${paymentId}`, {
     method: 'PUT',

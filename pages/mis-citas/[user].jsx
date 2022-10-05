@@ -12,10 +12,6 @@ function UserAppointments() {
   const router = useRouter();
 
   const notAppointments = profile => {
-    console.log(
-      '🚀 ~ file: [user].jsx ~ line 16 ~ notAppointments ~ user',
-      user
-    );
     Swal.fire({
       title: `¡Aún no ha generado ninguna cita!`,
       text: 'Puede agendar citas desde su página de usuario.',
