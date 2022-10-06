@@ -178,7 +178,7 @@ function Booking({ setShowModal }) {
                     </select>
                   </div>
                   <a
-                    href='/portafolio '
+                    href='/tarifas'
                     target='blank'
                     className={styles.services__detail}
                   >

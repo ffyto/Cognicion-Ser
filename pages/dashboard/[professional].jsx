@@ -52,7 +52,7 @@ function UserHome() {
                 <p>Verifique las citas que tiene asignadas</p>
               </a>
             </Link>
-            <Link href={`/portafolio`}>
+            <Link href={`/tarifas`}>
               <a className={styles.card}>
                 <h2>Servicios &rarr;</h2>
                 <p>Vea en detalle los servicios que ofrecemos</p>

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import NavBar from '../components/navBar';
-import styles from '../styles/pages/portafolio.module.scss';
+import styles from '../styles/pages/tarifas.module.scss';
 import Footer from '../components/footer';
 import { getAllServices } from '../services/services';
 
-function Portafolio() {
+function Tarifas() {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
@@ -78,4 +78,4 @@ function Portafolio() {
   );
 }
 
-export default Portafolio;
+export default Tarifas;

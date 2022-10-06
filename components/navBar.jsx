@@ -47,8 +47,8 @@ function NavBar() {
               <NavDropdown.Item href='/servicios'>
                 Nuestros Servicios
               </NavDropdown.Item>
-              <NavDropdown.Item href='/portafolio'>
-                Nuestro Portafolio
+              <NavDropdown.Item href='/tarifas'>
+                Paquetes y Tarifas
               </NavDropdown.Item>
             </NavDropdown>
 
