@@ -7,3 +7,7 @@ export function getAllNonAvailableHours() {
 export function createNonAvailableHour(user) {
   return NonAvailabeHour.create(user);
 }
+
+export function deleteNonAvailableHour(id) {
+  return NonAvailabeHour.findByIdAndRemove(id);
+}

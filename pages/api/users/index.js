@@ -66,7 +66,7 @@ export default async function handler(req, res) {
           },
         };
 
-        await sendMail(message);
+        const mail = await sendMail(message);
 
         console.log('[SUCCESS]: User created successfully', user);
         return res.status(201).json(user.profile);

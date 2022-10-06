@@ -50,18 +50,21 @@ function Booking({ setShowModal }) {
     const appointmentDay = new Date(day).toLocaleDateString('default');
     const appointmentHour = new Date(time).toLocaleTimeString('default');
     const date = { appointmentDay, appointmentHour };
+    let nonAvailableHour = await createNonAvailableHour({
+      day: appointmentDay,
+      hour: appointmentHour,
+    });
+    nonAvailableHour = JSON.parse(nonAvailableHour);
+
     let appointment = await createAppointment({
       pacient,
       date,
       title,
       price,
       service,
+      nonAvailableHour: nonAvailableHour._id,
     });
 
-    await createNonAvailableHour({
-      day: appointmentDay,
-      hour: appointmentHour,
-    });
     appointment = JSON.parse(appointment);
 
     Swal.fire({

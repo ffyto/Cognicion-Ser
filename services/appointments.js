@@ -68,3 +68,15 @@ export async function findAppointmentByPaymentAndUpdate(
   });
   return response.json();
 }
+
+export async function deleteAppointment(id) {
+  const token = localStorage.getItem('token');
+  const response = await fetch(`${BASE_URL}/api/appointments/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+  });
+  return response.json();
+}

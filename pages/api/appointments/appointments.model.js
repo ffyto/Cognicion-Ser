@@ -16,6 +16,11 @@ const AppointmentSchema = new Schema(
       ref: 'User',
       required: true,
     },
+    nonAvailableHour: {
+      type: Schema.Types.ObjectId,
+      ref: 'NonAvailableHour',
+      required: true,
+    },
     pacient: {
       name: { type: String },
       lastName: { type: String },
