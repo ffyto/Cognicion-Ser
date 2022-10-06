@@ -10,10 +10,8 @@ export async function getSingleService(id) {
 }
 
 export async function getAllServices() {
-  const token = localStorage.getItem('token');
   const response = await fetch(`${BASE_URL}/api/services`, {
     method: 'GET',
-    headers: { Authorization: `Bearer ${token}` },
   });
   return response.json();
 }

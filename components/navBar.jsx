@@ -38,9 +38,20 @@ function NavBar() {
             <Nav.Link href='/acerca-de' className={styles.navbar__element}>
               Nosotros
             </Nav.Link>
-            <Nav.Link href='/servicios' className={styles.navbar__element}>
-              Servicios
-            </Nav.Link>
+
+            <NavDropdown
+              title='Servicios'
+              id='basic-nav-dropdown'
+              className={styles.navbar__element}
+            >
+              <NavDropdown.Item href='/servicios'>
+                Nuestros Servicios
+              </NavDropdown.Item>
+              <NavDropdown.Item href='/portafolio'>
+                Nuestro Portafolio
+              </NavDropdown.Item>
+            </NavDropdown>
+
             <Nav.Link href='/contacto' className={styles.navbar__element}>
               Contáctenos{' '}
             </Nav.Link>

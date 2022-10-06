@@ -34,13 +34,14 @@ function UserHome() {
           </p>
 
           <div className={styles.grid}>
-            <button
-              href='/acerca-de'
-              onClick={handleOpenModal}
-              className={styles.card}
-            >
+            <button onClick={handleOpenModal} className={styles.card}>
               <h2>Crear Servicios &rarr;</h2>
               <p>Agregue servicios para sus usuarios</p>
+            </button>
+
+            <button className={styles.card}>
+              <h2>Disponibilidad &rarr;</h2>
+              <p>Modifique su disponibilidad horaria</p>
             </button>
 
             <Link
@@ -49,6 +50,12 @@ function UserHome() {
               <a className={styles.card}>
                 <h2>Verificar Citas &rarr;</h2>
                 <p>Verifique las citas que tiene asignadas</p>
+              </a>
+            </Link>
+            <Link href={`/portafolio`}>
+              <a className={styles.card}>
+                <h2>Servicios &rarr;</h2>
+                <p>Vea en detalle los servicios que ofrecemos</p>
               </a>
             </Link>
           </div>

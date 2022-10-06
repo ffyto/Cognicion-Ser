@@ -29,7 +29,7 @@ export default async function pagos(req, res) {
         {
           id: appointment.id,
           title: appointment.title,
-          unit_price: 360000,
+          unit_price: appointment.price,
           quantity: 1,
         },
       ],

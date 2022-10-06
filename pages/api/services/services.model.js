@@ -9,7 +9,6 @@ const ServiceSchema = new Schema(
     modality: {
       type: String,
       required: true,
-      unique: true,
     },
     price: {
       type: Number,

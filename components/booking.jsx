@@ -1,27 +1,44 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from '../styles/components/booking.module.scss';
 import Calendar from './calendar2';
 import { createAppointment } from '../services/appointments';
 import { createNonAvailableHour } from '../services/nonAvailableHours';
+import { getAllServices } from '../services/services';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/router';
 
 function Booking({ setShowModal }) {
   const [step, setStep] = useState(0);
+  const [services, setServices] = useState([]);
+  const [service, setService] = useState('');
   const [pacient, setPacient] = useState({});
   const [day, setDay] = useState(null);
   const [time, setTime] = useState(null);
   const [title, setTitle] = useState('');
+  const [price, setPrice] = useState(0);
   const router = useRouter();
+
   const step_form = step + 1;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const allServices = await getAllServices();
+      setServices(allServices);
+    };
+    fetchData();
+  }, []);
 
   const handlePacient = e => {
     const { value, name } = e.target;
     setPacient({ ...pacient, [name]: value });
   };
 
-  const handleAppointmentTitle = e => {
-    setTitle(e.target.value);
+  const handleAppointmentData = e => {
+    const id = e.target.value;
+    const singleService = services.find(service => service._id === id);
+    setTitle(singleService.title);
+    setPrice(singleService.price);
+    setService(id);
   };
 
   const handleSubmit = e => {
@@ -37,6 +54,8 @@ function Booking({ setShowModal }) {
       pacient,
       date,
       title,
+      price,
+      service,
     });
 
     await createNonAvailableHour({
@@ -132,28 +151,36 @@ function Booking({ setShowModal }) {
                 <div className={styles.form_data}>
                   <div className={styles.input_field}>
                     <select
-                      className={styles.input}
+                      className={styles.select}
                       required
-                      onChange={handleAppointmentTitle}
+                      onChange={handleAppointmentData}
                       defaultValue={title}
                     >
                       <option value='' disabled hidden>
                         Servicios disponibles
                       </option>
-                      <option value='Evaluación neuropsicológica'>
-                        Evaluación neuropsicológica ($360.000)
-                      </option>
-                      <option value='Acompañamiento en cuidados'>
-                        Acompañamiento en cuidados ($510.000)
-                      </option>
-                      <option value='Orientación Docente'>
-                        Orientación Docente ($400.000)
-                      </option>
-                      <option value='Competencias Cognitivas'>
-                        Competencias Cognitivas ($600.000)
-                      </option>
+                      {services.length
+                        ? services.map(service => (
+                            <option
+                              value={service._id}
+                              key={service._id}
+                              className={styles.services__option}
+                            >
+                              {service.title.toLowerCase()} {''} (
+                              {service.modality}) {''}
+                              (${service.price.toLocaleString('es')})
+                            </option>
+                          ))
+                        : null}
                     </select>
                   </div>
+                  <a
+                    href='/portafolio '
+                    target='blank'
+                    className={styles.services__detail}
+                  >
+                    <p>Ver detalle de los Servicios</p>
+                  </a>
                 </div>
               </div>
               <div className={styles.footer}>

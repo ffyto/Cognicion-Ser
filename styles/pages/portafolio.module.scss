@@ -1,4 +1,5 @@
 .container {
+  min-height: 100vh;
   display: block;
   text-align: center;
   flex-direction: column;
@@ -8,7 +9,8 @@
 .main {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  height: 80vh;
+  min-height: 75vh;
+  height: auto;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -19,11 +21,6 @@
   margin-left: auto;
   margin-right: auto;
   font-family: Alcubierre;
-
-  button {
-    background: none;
-    border: none;
-  }
 }
 
 .description {
@@ -36,49 +33,66 @@
 .grid {
   margin-top: 30px;
   margin-left: 20px;
-  display: flex;
+  display: block;
   align-items: center;
   justify-content: center;
   max-width: 800px;
-  flex-direction: column;
 }
 
 .card {
+  position: relative;
   display: flex;
   flex-direction: column;
   color: #624477;
   margin: 7px 15px 8px;
   padding: 1.5rem;
   text-align: justify;
-  align-items:center;
+  align-items:left;
   text-decoration: none;
   border: 1px solid rgba(28,128,148);
   border-radius: 10px;
-  width: 280px;
-  height: 120px;
+  width: 90%;
+  height: auto;
   background: white;
   box-shadow: 11px 10px 28px -8px rgba(0,0,0,0.75);
   font-family: Franklin Gothic Medium;
 
   h2 {
-    margin: 0 0 1rem 0;
+    margin-bottom: 10px;
     font-size: 1.2rem;
+    text-align: center;
   }
 
   p {
     margin: 0;
     font-size: 1rem;
     line-height: 1.5;
+    text-align: left;
+  }
+
+  small {
+    color: rgba(28,128,148);
+    font-size: medium;
   }
 }
 
-.card:hover {
-  color: #624477;
-  transition-duration: 0.8s;
-  transform: scale(1.1);
+.service__subtitle {
+  margin-bottom: 20px;
 }
 
+.service__includedServices__list {
+border: 1px solid rgba(28,128,148);
+border-radius: 5px;
+}
 
+.service__includedServices {
+  margin-top: 10px;
+  margin-right: 20px;
+
+  p {
+    text-align: justify;
+  }
+}
 
 @media (max-width: 600px) {
   .grid {

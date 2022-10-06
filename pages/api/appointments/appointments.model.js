@@ -34,6 +34,10 @@ const AppointmentSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'Service',
     },
+    price: {
+      type: Number,
+      required: true,
+    },
     paymentId: { type: String },
     payment: {
       type: String,
