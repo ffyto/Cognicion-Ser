@@ -6,7 +6,6 @@ import Footer from '../../components/footer';
 import ServiceModal from '../../components/serviceModal';
 
 function UserHome() {
-  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
   const [showModal, setShowModal] = useState(false);
   const [professional, setProfessional] = useState({});
   useEffect(() => {
@@ -41,7 +40,7 @@ function UserHome() {
               <p>Modifique su disponibilidad horaria</p>
             </button>
             <Link
-              href={`${BASE_URL}/agenda/${professional.name}-${professional.lastName}`}
+              href={`/agenda/${professional.name}-${professional.lastName}`}
             >
               <a className={styles.card}>
                 <h2>Verificar Citas &rarr;</h2>
