@@ -15,6 +15,7 @@ function ProfessionalAppointments() {
   const [appointments, setAppointments] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [id, setId] = useState('');
+
   const router = useRouter();
 
   const notAppointments = profile => {
@@ -50,6 +51,7 @@ function ProfessionalAppointments() {
     setId(appointment._id);
     setShowModal(true);
   };
+
 
   const handleCancelAppointment = async appointmentId => {
     Swal.fire({
@@ -167,5 +169,6 @@ function ProfessionalAppointments() {
     </>
   );
 }
+
 
 export default ProfessionalAppointments;

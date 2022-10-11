@@ -25,25 +25,21 @@ function UserHome() {
           <p className={styles.description}>
             Hola {professional.name} {professional.lastName}
           </p>
-
           <p className={styles.description}>
             <small>
               En este espacio, podrá verificar las citas que tiene asignadas,
               modificar su disponibilidad en el calendario y crear servicios.
             </small>
           </p>
-
           <div className={styles.grid}>
             <button onClick={handleOpenModal} className={styles.card}>
               <h2>Crear Servicios &rarr;</h2>
               <p>Agregue servicios para sus usuarios</p>
             </button>
-
             <button className={styles.card}>
               <h2>Disponibilidad &rarr;</h2>
               <p>Modifique su disponibilidad horaria</p>
             </button>
-
             <Link
               href={`${BASE_URL}/agenda/${professional.name}-${professional.lastName}`}
             >

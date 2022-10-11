@@ -118,7 +118,6 @@ export default async function handler(req, res) {
 
         await sendMail(message);
         await deleteNonAvailableHour(nonAvailableHour);
-
         await removeAppointmentToUser(user.id, id);
         await deleteAppointment(id);
         console.log(`[SUCCESS]: Appointment ${id} eliminated`);

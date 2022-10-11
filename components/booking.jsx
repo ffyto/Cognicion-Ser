@@ -50,6 +50,7 @@ function Booking({ setShowModal }) {
     const appointmentDay = new Date(day).toLocaleDateString('default');
     const appointmentHour = new Date(time).toLocaleTimeString('default');
     const date = { appointmentDay, appointmentHour };
+
     let nonAvailableHour = await createNonAvailableHour({
       day: appointmentDay,
       hour: appointmentHour,
@@ -162,6 +163,7 @@ function Booking({ setShowModal }) {
                       <option value='' disabled hidden>
                         Servicios disponibles
                       </option>
+
                       {services.length
                         ? services.map(service => (
                             <option
