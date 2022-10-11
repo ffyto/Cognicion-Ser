@@ -16,6 +16,11 @@ const AppointmentSchema = new Schema(
       ref: 'User',
       required: true,
     },
+    nonAvailableHour: {
+      type: Schema.Types.ObjectId,
+      ref: 'NonAvailableHour',
+      required: true,
+    },
     pacient: {
       name: { type: String },
       lastName: { type: String },
@@ -33,6 +38,10 @@ const AppointmentSchema = new Schema(
     service: {
       type: Schema.Types.ObjectId,
       ref: 'Service',
+    },
+    price: {
+      type: Number,
+      required: true,
     },
     paymentId: { type: String },
     payment: {

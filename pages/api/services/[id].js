@@ -51,7 +51,11 @@ export default async function handler(req, res) {
         console.error(`[ERROR]: ${error}`);
         return res
           .status(500)
-          .json({ message: 'Error al intentar actualizar el servicio', error });
+          .json({
+            status: 500,
+            message: 'Error al intentar actualizar el servicio',
+            error,
+          });
       }
     }
 
@@ -60,7 +64,9 @@ export default async function handler(req, res) {
       try {
         await deleteService(id);
         console.log(`[SUCCESS]: Service ${id} eliminated`);
-        return res.status(200).json({ message: 'Servicio eliminado' });
+        return res
+          .status(200)
+          .json({ status: 200, message: 'El servicio ha sido eliminado' });
       } catch (error) {
         console.error(`[ERROR]: ${error}`);
         return res.status(500).json({ error });

@@ -2,13 +2,14 @@
   min-height: 100vh;
   display: block;
   text-align: center;
+  flex-direction: column;
   background: linear-gradient(273deg, rgba(98,68,119) 30%, rgba(28,128,148) 100%);
 }
 
 .main {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  min-height: 80vh;
+  min-height: 75vh;
   height: auto;
   flex: 1;
   display: flex;
@@ -31,56 +32,108 @@
 
 .grid {
   margin-top: 30px;
-  flex-wrap: wrap;
-  display: flex;
+  margin-left: 20px;
+  display: block;
   align-items: center;
   justify-content: center;
   max-width: 800px;
 }
 
 .card {
+  position: relative;
   display: flex;
   flex-direction: column;
   color: #624477;
   margin: 7px 15px 8px;
   padding: 1.5rem;
   text-align: justify;
-  align-items:center;
+  align-items:left;
   text-decoration: none;
   border: 1px solid rgba(28,128,148);
   border-radius: 10px;
-  width: 40%;
+  width: 90%;
   height: auto;
   background: white;
   box-shadow: 11px 10px 28px -8px rgba(0,0,0,0.75);
   font-family: Franklin Gothic Medium;
 
   h2 {
-    margin: 0 0 1rem 0;
+    margin-bottom: 10px;
     font-size: 1.2rem;
+    text-align: center;
   }
 
   p {
     margin: 0;
     font-size: 1rem;
     line-height: 1.5;
+    text-align: left;
+  }
+
+  small {
+    color: rgba(28,128,148);
+    font-size: medium;
   }
 }
 
-.card:hover {
-  color: #624477;
-  transition-duration: 0.8s;
-  transform: scale(1.1);
+.service__subtitle {
+  margin-bottom: 20px;
+}
+
+.service__includedServices__list {
+border: 1px solid rgba(28,128,148);
+border-radius: 5px;
+padding-bottom: 10px;
+margin-bottom: 30px;
+}
+
+.service__includedServices {
+  margin-top: 10px;
+  margin-right: 20px;
+
+  p {
+    text-align: justify;
+  }
+}
+
+.delete__button {
+  position: absolute;
+  width: 25px;
+  color: rgb(199, 199, 199);
+  font-size: 15px;
+  bottom: 0;
+  right: 0;
+  height: auto;
+  margin: 0 10px 10px 0;
+  cursor: pointer;
+  background-color: rgb(115, 115, 115);
+  border: none;
+  border-radius: 3px;
+}
+
+.delete__button:hover {
+  background-color: red;
+  transition-duration: 0.4s;
+}
+
+.edit__button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 0 60px 10px 0;
+  border: none;
+  border-radius: 3px;
+}
+
+.edit__button:hover {
+  background-color: rgb(58, 171, 44);
+  transition-duration: 0.4s;
 }
 
 @media (max-width: 600px) {
   .grid {
     width: 100%;
     flex-direction: column;
-  }
-
-  .card {
-    width: 60%;
   }
 }
 

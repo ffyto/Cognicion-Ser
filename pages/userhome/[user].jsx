@@ -59,6 +59,13 @@ function UserHome() {
                 <p>Verifique sus citas ya agendadas</p>
               </a>
             </Link>
+
+            <Link href={`/tarifas`}>
+              <a className={styles.card}>
+                <h2>Servicios &rarr;</h2>
+                <p>Vea en detalle los servicios que ofrecemos</p>
+              </a>
+            </Link>
           </div>
           <Modal setShowModal={setShowModal} show={showModal} />
         </main>

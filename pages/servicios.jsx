@@ -12,7 +12,6 @@ export default function Services() {
         <main className={styles.main}>
           <Header />
           <p className={styles.description}>Nuestros Servicios</p>
-
           <div className={styles.grid}>
             <div className={styles.service}>
               <div className={styles.card}>
