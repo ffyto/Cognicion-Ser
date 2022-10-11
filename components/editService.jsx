@@ -1,30 +1,21 @@
 import { useState, useEffect } from 'react';
-import styles from '../styles/components/createService.module.scss';
-import { createService } from '../services/services';
+import styles from '../styles/components/editService.module.scss';
+import { updateService, getSingleService } from '../services/services';
 import Swal from 'sweetalert2';
 import { v4 as uuid } from 'uuid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { getSingleService } from '../services/services';
 
 function ServiceEdition({ setShowModal, id }) {
   const [step, setStep] = useState(0);
-  const [service, setService] = useState({});
+  const [service, setService] = useState({ modality: '' });
   const [subService, setSubService] = useState({});
-  console.log(
-    '🚀 ~ file: editService.jsx ~ line 14 ~ ServiceEdition ~ subService',
-    subService
-  );
   const [includedServices, setIncludedServices] = useState([]);
 
   const step_form = step + 1;
 
   const getService = async () => {
     const singleService = await getSingleService(id);
-    console.log(
-      '🚀 ~ file: editService.jsx ~ line 20 ~ getService ~ singleService',
-      singleService
-    );
     setService(singleService);
     setIncludedServices(singleService.includedServices);
   };
@@ -60,7 +51,7 @@ function ServiceEdition({ setShowModal, id }) {
     setIncludedServices(newIncludedServices);
   };
 
-  const handleCreateService = async () => {
+  const handleUpdateService = async () => {
     if (!includedServices.length) {
       Swal.fire({
         title: `¡Debe agregar por lo menos un Sub-servicio!`,
@@ -70,14 +61,12 @@ function ServiceEdition({ setShowModal, id }) {
       return;
     }
 
-    let newService = await createService({
+    const newService = await updateService(id, {
       modality: service.modality,
       title: service.title,
       price: service.price,
       includedServices,
     });
-
-    newService = JSON.parse(newService);
 
     if (newService.error) {
       Swal.fire({
@@ -88,6 +77,14 @@ function ServiceEdition({ setShowModal, id }) {
       });
     }
 
+    if (newService.status === 500) {
+      Swal.fire({
+        title: `¡${newService.message}!`,
+        text: 'Intentelo de nuevo más tarde.',
+        icon: 'error',
+        confirmButtonText: `Aceptar`,
+      });
+    }
     if (newService.message.includes('autorizado')) {
       Swal.fire({
         title: `¡${newService.message}!`,
@@ -97,10 +94,15 @@ function ServiceEdition({ setShowModal, id }) {
     } else {
       Swal.fire({
         title: `¡${newService.message}!`,
-        text: 'Ahora sus usuarios pueden ver y adquirir este servicio desde sus perfiles.',
         icon: 'success',
         confirmButtonText: `Aceptar`,
-      }).then(setShowModal(false));
+      }).then(reload => {
+        if (reload.Confirm) {
+          window.location.reload();
+        } else {
+          window.location.reload();
+        }
+      });
     }
   };
 
@@ -134,16 +136,14 @@ function ServiceEdition({ setShowModal, id }) {
                   </div>
 
                   <div className={styles.input_field}>
+                    <small>Modalidad</small>
                     <select
                       className={styles.input}
                       required
                       onChange={handleService}
-                      defaultValue={service.modality}
+                      value={service.modality}
                       name='modality'
                     >
-                      <option value='' disabled hidden>
-                        Seleccione una Modalidad
-                      </option>
                       <option value='Presencial'>Presencial</option>
                       <option value='Virtual'>Virtual</option>
                     </select>
@@ -221,7 +221,7 @@ function ServiceEdition({ setShowModal, id }) {
                       id='subService.description'
                     />
                   </div>
-                  {includedServices.length ? (
+                  {includedServices?.length ? (
                     <ul className={styles.includedServicesList}>
                       <p>Servicios a Incluir:</p>
                       {includedServices.map(includedService => (
@@ -261,8 +261,8 @@ function ServiceEdition({ setShowModal, id }) {
                   >
                     Anterior
                   </button>
-                  <button type='button' onClick={handleCreateService}>
-                    Crear Servicio
+                  <button type='button' onClick={handleUpdateService}>
+                    Actualizar Servicio
                   </button>
                 </div>
               </div>

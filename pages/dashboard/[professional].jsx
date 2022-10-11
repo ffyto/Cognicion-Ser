@@ -55,7 +55,7 @@ function UserHome() {
             <Link href={`/tarifas`}>
               <a className={styles.card}>
                 <h2>Servicios &rarr;</h2>
-                <p>Vea en detalle los servicios que ofrecemos</p>
+                <p>Vea y edite los service que ahora mismo ofrece</p>
               </a>
             </Link>
           </div>

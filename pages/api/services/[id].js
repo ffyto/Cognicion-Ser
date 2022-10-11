@@ -51,7 +51,11 @@ export default async function handler(req, res) {
         console.error(`[ERROR]: ${error}`);
         return res
           .status(500)
-          .json({ message: 'Error al intentar actualizar el servicio', error });
+          .json({
+            status: 500,
+            message: 'Error al intentar actualizar el servicio',
+            error,
+          });
       }
     }
 
