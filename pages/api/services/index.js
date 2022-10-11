@@ -6,7 +6,6 @@ export default async function handler(req, res) {
   connectDb();
   const { method } = req;
 
-
   switch (method) {
     case 'GET': {
       try {
@@ -17,6 +16,7 @@ export default async function handler(req, res) {
         console.error(`[ERROR]: ${error}`);
         return res.status(500).json({ error });
       }
+    }
 
     case 'POST': {
       const serviceData = req.body;
@@ -43,3 +43,4 @@ export default async function handler(req, res) {
     }
   }
 }
+
