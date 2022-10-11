@@ -66,7 +66,7 @@ function ProfessionalAppointments() {
         if (response.status === 404) {
           Swal.fire({
             title: `¡${message}!`,
-            icon: 'waring',
+            icon: 'warning',
             confirmButtonText: `Aceptar`,
           });
         }

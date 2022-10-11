@@ -25,6 +25,9 @@ const ServiceSchema = new Schema(
         sessions: {
           type: String,
         },
+        id: {
+          type: String,
+        },
       },
     ],
   },

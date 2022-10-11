@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
-import ServiceCreation from './createService';
+import ServiceEdition from './editService';
 import styles from '../styles/components/modal.module.scss';
 
-const ServiceModal = ({ show, setShowModal }) => {
+const EditServiceModal = ({ show, setShowModal, id }) => {
   const [isBrowser, setIsBrowser] = useState(false);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const ServiceModal = ({ show, setShowModal }) => {
         </button>
 
         <StyledModalBody>
-          <ServiceCreation setShowModal={setShowModal} />
+          <ServiceEdition setShowModal={setShowModal} id={id} />
         </StyledModalBody>
       </StyledModal>
     </StyledModalOverlay>
@@ -68,4 +68,4 @@ const StyledModalOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-export default ServiceModal;
+export default EditServiceModal;

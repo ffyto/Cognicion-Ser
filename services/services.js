@@ -41,3 +41,15 @@ export async function updateService(id, appointmentUpdate) {
   });
   return response.json();
 }
+
+export async function deleteService(id) {
+  const token = localStorage.getItem('token');
+  const response = await fetch(`${BASE_URL}/api/services/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+  });
+  return response.json();
+}
