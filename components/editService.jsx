@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
-import styles from '../styles/components/editService.module.scss';
-import { updateService, getSingleService } from '../services/services';
+import React, { useState, useEffect } from 'react';
+import { PropTypes } from 'prop-types';
 import Swal from 'sweetalert2';
 import { v4 as uuid } from 'uuid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import styles from '../styles/components/editService.module.scss';
+import { updateService, getSingleService } from '../services/services';
 
 function ServiceEdition({ setShowModal, id }) {
   const [step, setStep] = useState(0);
@@ -12,7 +13,7 @@ function ServiceEdition({ setShowModal, id }) {
   const [subService, setSubService] = useState({});
   const [includedServices, setIncludedServices] = useState([]);
 
-  const step_form = step + 1;
+  const stepForm = step + 1;
 
   const getService = async () => {
     const singleService = await getSingleService(id);
@@ -44,9 +45,9 @@ function ServiceEdition({ setShowModal, id }) {
     }
   };
 
-  const handleDeleteSubService = id => {
+  const handleDeleteSubService = includedServiceId => {
     const newIncludedServices = includedServices.filter(
-      subService => subService.id !== id
+      includedService => includedService.id !== includedServiceId
     );
     setIncludedServices(newIncludedServices);
   };
@@ -111,167 +112,174 @@ function ServiceEdition({ setShowModal, id }) {
     setStep(step + 1);
   };
 
-  if (step == 0) {
+  if (step === 0) {
     return (
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.card}>
           <div>
-            <>
-              <div className={styles.form_body}>
-                <div className={styles.header}>
-                  <h4>Datos del Servicio</h4>
-                  <span>{step_form}</span>
-                </div>
-                <div className={styles.form_data}>
-                  <div className={styles.input_field}>
-                    <input
-                      className={styles.input}
-                      name='title'
-                      type='text'
-                      required
-                      onChange={handleService}
-                      defaultValue={service.title}
-                    />
-                    <span>Título</span>
-                  </div>
-
-                  <div className={styles.input_field}>
-                    <small>Modalidad</small>
-                    <select
-                      className={styles.input}
-                      required
-                      onChange={handleService}
-                      value={service.modality}
-                      name='modality'
-                    >
-                      <option value='Presencial'>Presencial</option>
-                      <option value='Virtual'>Virtual</option>
-                    </select>
-                  </div>
-
-                  <div className={styles.input_field}>
-                    <input
-                      className={styles.input}
-                      name='price'
-                      type='number'
-                      required
-                      onChange={handleService}
-                      defaultValue={service.price}
-                    />
-                    <span>Precio</span>
-                  </div>
+            <div className={styles.form_body}>
+              <div className={styles.header}>
+                <h4>Datos del Servicio</h4>
+                <span>{stepForm}</span>
+              </div>
+              <div className={styles.form_data}>
+                <div className={styles.input_field}>
+                  <input
+                    className={styles.input}
+                    name='title'
+                    type='text'
+                    required
+                    onChange={handleService}
+                    defaultValue={service.title}
+                  />
+                  <span>Título</span>
                 </div>
 
-                <div className={styles.footer}>
-                  <button type='submit'>Siguiente</button>
+                <div className={styles.input_field}>
+                  <small>Modalidad</small>
+                  <select
+                    className={styles.input}
+                    required
+                    onChange={handleService}
+                    value={service.modality}
+                    name='modality'
+                  >
+                    <option value='Presencial'>Presencial</option>
+                    <option value='Virtual'>Virtual</option>
+                  </select>
+                </div>
+
+                <div className={styles.input_field}>
+                  <input
+                    className={styles.input}
+                    name='price'
+                    type='number'
+                    required
+                    onChange={handleService}
+                    defaultValue={service.price}
+                  />
+                  <span>Precio</span>
                 </div>
               </div>
-            </>
+
+              <div className={styles.footer}>
+                <button type='submit'>Siguiente</button>
+              </div>
+            </div>
           </div>
         </div>
       </form>
     );
-  } else if (step == 1) {
+  }
+  if (step === 1) {
     return (
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.card}>
           <div>
-            <>
-              <div className={styles.form_body}>
-                <div className={styles.header}>
-                  <h4>Servicios Incluidos</h4>
+            <div className={styles.form_body}>
+              <div className={styles.header}>
+                <h4>Servicios Incluidos</h4>
 
-                  <span>{step_form}</span>
-                </div>
-                <p>Describa los Sub-servicios incluídos:</p>
-                <div className={styles.form_data}>
-                  <div className={styles.input_field}>
-                    <input
-                      className={styles.input}
-                      name='name'
-                      type='text'
-                      required
-                      onChange={handleSubService}
-                      defaultValue={subService.name}
-                      id='subService.name'
-                    />
-                    <span>Nombre del Sub-servicio</span>
-                  </div>
-                  <div className={styles.input_field}>
-                    <input
-                      className={styles.input}
-                      name='sessions'
-                      type='text'
-                      required
-                      onChange={handleSubService}
-                      defaultValue={subService.sessions}
-                      id='subService.sessions'
-                    />
-                    <span>Número de Sesiones</span>
-                  </div>
-                  <div className={styles.input_field}>
-                    <textarea
-                      className={styles.textarea}
-                      name='description'
-                      type='text'
-                      required
-                      onChange={handleSubService}
-                      defaultValue={subService.description}
-                      placeholder='Descripción del Sub-servicio'
-                      id='subService.description'
-                    />
-                  </div>
-                  {includedServices?.length ? (
-                    <ul className={styles.includedServicesList}>
-                      <p>Servicios a Incluir:</p>
-                      {includedServices.map(includedService => (
-                        <li
-                          key={includedService.id}
-                          className={styles.includedService}
-                        >
-                          {includedService.name}
-                          <button
-                            className={styles.delete__button}
-                            type='button'
-                            onClick={() =>
-                              handleDeleteSubService(includedService.id)
-                            }
-                          >
-                            <FontAwesomeIcon icon={faTrash} />
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : null}
-                  <section className={styles.addSubService__button__section}>
-                    <button
-                      type='button'
-                      onClick={handleCreateSubService}
-                      className={styles.addSubService__button}
-                    >
-                      Agregar Sub-servicio
-                    </button>
-                  </section>
-                </div>
-                <div className={styles.footer}>
-                  <button
-                    onClick={() => {
-                      setStep(step - 1);
-                    }}
-                  >
-                    Anterior
-                  </button>
-                  <button type='button' onClick={handleUpdateService}>
-                    Actualizar Servicio
-                  </button>
-                </div>
+                <span>{stepForm}</span>
               </div>
-            </>
+              <p>Describa los Sub-servicios incluídos:</p>
+              <div className={styles.form_data}>
+                <div className={styles.input_field}>
+                  <input
+                    className={styles.input}
+                    name='name'
+                    type='text'
+                    required
+                    onChange={handleSubService}
+                    defaultValue={subService.name}
+                    id='subService.name'
+                  />
+                  <span>Nombre del Sub-servicio</span>
+                </div>
+                <div className={styles.input_field}>
+                  <input
+                    className={styles.input}
+                    name='sessions'
+                    type='text'
+                    required
+                    onChange={handleSubService}
+                    defaultValue={subService.sessions}
+                    id='subService.sessions'
+                  />
+                  <span>Número de Sesiones</span>
+                </div>
+                <div className={styles.input_field}>
+                  <textarea
+                    className={styles.textarea}
+                    name='description'
+                    type='text'
+                    required
+                    onChange={handleSubService}
+                    defaultValue={subService.description}
+                    placeholder='Descripción del Sub-servicio'
+                    id='subService.description'
+                  />
+                </div>
+                {includedServices?.length ? (
+                  <ul className={styles.includedServicesList}>
+                    <p>Servicios a Incluir:</p>
+                    {includedServices.map(includedService => (
+                      <li
+                        key={includedService.id}
+                        className={styles.includedService}
+                      >
+                        {includedService.name}
+                        <button
+                          className={styles.delete__button}
+                          type='button'
+                          onClick={() =>
+                            handleDeleteSubService(includedService.id)
+                          }
+                        >
+                          <FontAwesomeIcon icon={faTrash} />
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+                <section className={styles.addSubService__button__section}>
+                  <button
+                    type='button'
+                    onClick={handleCreateSubService}
+                    className={styles.addSubService__button}
+                  >
+                    Agregar Sub-servicio
+                  </button>
+                </section>
+              </div>
+              <div className={styles.footer}>
+                <button
+                  type='button'
+                  onClick={() => {
+                    setStep(step - 1);
+                  }}
+                >
+                  Anterior
+                </button>
+                <button type='button' onClick={handleUpdateService}>
+                  Actualizar Servicio
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </form>
     );
   }
 }
+
+ServiceEdition.propTypes = {
+  setShowModal: PropTypes.func,
+  id: PropTypes.string,
+};
+ServiceEdition.defaultProps = {
+  setShowModal: () => null,
+  id: '',
+};
 
 export default ServiceEdition;

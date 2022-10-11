@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import NavBar from '../../components/navBar';
 import styles from '../../styles/pages/dashboard.module.scss';
@@ -31,27 +31,31 @@ function UserHome() {
             </small>
           </p>
           <div className={styles.grid}>
-            <button onClick={handleOpenModal} className={styles.card}>
+            <button
+              onClick={handleOpenModal}
+              className={styles.card}
+              type='button'
+            >
               <h2>Crear Servicios &rarr;</h2>
               <p>Agregue servicios para sus usuarios</p>
             </button>
-            <button className={styles.card}>
+            <button className={styles.card} type='button'>
               <h2>Disponibilidad &rarr;</h2>
               <p>Modifique su disponibilidad horaria</p>
             </button>
             <Link
               href={`/agenda/${professional.name}-${professional.lastName}`}
             >
-              <a className={styles.card}>
+              <button className={styles.card} type='button'>
                 <h2>Verificar Citas &rarr;</h2>
                 <p>Verifique las citas que tiene asignadas</p>
-              </a>
+              </button>
             </Link>
-            <Link href={`/tarifas`}>
-              <a className={styles.card}>
+            <Link href='/tarifas'>
+              <button className={styles.card} type='button'>
                 <h2>Servicios &rarr;</h2>
                 <p>Vea y edite los service que ahora mismo ofrece</p>
-              </a>
+              </button>
             </Link>
           </div>
           <ServiceModal setShowModal={setShowModal} show={showModal} />

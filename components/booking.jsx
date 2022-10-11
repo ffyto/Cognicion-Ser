@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { PropTypes } from 'prop-types';
+import Swal from 'sweetalert2';
 import styles from '../styles/components/booking.module.scss';
 import Calendar from './calendar2';
 import { createAppointment } from '../services/appointments';
 import { createNonAvailableHour } from '../services/nonAvailableHours';
 import { getAllServices } from '../services/services';
-import Swal from 'sweetalert2';
-import { useRouter } from 'next/router';
 
 function Booking({ setShowModal }) {
   const [step, setStep] = useState(0);
@@ -18,7 +19,7 @@ function Booking({ setShowModal }) {
   const [price, setPrice] = useState(0);
   const router = useRouter();
 
-  const step_form = step + 1;
+  const stepForm = step + 1;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,7 +36,9 @@ function Booking({ setShowModal }) {
 
   const handleAppointmentData = e => {
     const id = e.target.value;
-    const singleService = services.find(service => service._id === id);
+    const singleService = services.find(
+      uniqueService => uniqueService._id === id
+    );
     setTitle(singleService.title);
     setPrice(singleService.price);
     setService(id);
@@ -84,167 +87,172 @@ function Booking({ setShowModal }) {
     });
   };
 
-  if (step == 0) {
+  if (step === 0) {
     return (
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.card}>
           <div>
-            <>
-              <div className={styles.form_body}>
-                <div className={styles.header}>
-                  <h4>Datos del Paciente</h4>
-                  <span>{step_form}</span>
+            <div className={styles.form_body}>
+              <div className={styles.header}>
+                <h4>Datos del Paciente</h4>
+                <span>{stepForm}</span>
+              </div>
+              <div className={styles.form_data}>
+                <div className={styles.input_field}>
+                  <input
+                    className={styles.input}
+                    name='name'
+                    type='text'
+                    required
+                    onChange={handlePacient}
+                    defaultValue={pacient.name}
+                  />
+                  <span>Nombre</span>
                 </div>
-                <div className={styles.form_data}>
-                  <div className={styles.input_field}>
-                    <input
-                      className={styles.input}
-                      name='name'
-                      type='text'
-                      required
-                      onChange={handlePacient}
-                      defaultValue={pacient.name}
-                    />
-                    <span>Nombre</span>
-                  </div>
 
-                  <div className={styles.input_field}>
-                    <input
-                      className={styles.input}
-                      name='lastName'
-                      type='text'
-                      required
-                      onChange={handlePacient}
-                      defaultValue={pacient.lastName}
-                    />
-                    <span>Apellidos</span>
-                  </div>
-
-                  <div className={styles.input_field}>
-                    <input
-                      className={styles.input}
-                      name='age'
-                      type='number'
-                      required
-                      onChange={handlePacient}
-                      defaultValue={pacient.age}
-                    />
-                    <span>Edad</span>
-                  </div>
+                <div className={styles.input_field}>
+                  <input
+                    className={styles.input}
+                    name='lastName'
+                    type='text'
+                    required
+                    onChange={handlePacient}
+                    defaultValue={pacient.lastName}
+                  />
+                  <span>Apellidos</span>
                 </div>
-                <div className={styles.footer__initial}>
-                  <button type='submit'>Siguiente</button>
+
+                <div className={styles.input_field}>
+                  <input
+                    className={styles.input}
+                    name='age'
+                    type='number'
+                    required
+                    onChange={handlePacient}
+                    defaultValue={pacient.age}
+                  />
+                  <span>Edad</span>
                 </div>
               </div>
-            </>
-          </div>
-        </div>
-      </form>
-    );
-  } else if (step == 1) {
-    return (
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <div className={styles.card}>
-          <div>
-            <>
-              <div className={styles.form_body}>
-                <div className={styles.header}>
-                  <h4>Elija un servicio</h4>
-                  <span>{step_form}</span>
-                </div>
-                <div className={styles.form_data}>
-                  <div className={styles.input_field}>
-                    <select
-                      className={styles.select}
-                      required
-                      onChange={handleAppointmentData}
-                      defaultValue={title}
-                    >
-                      <option value='' disabled hidden>
-                        Servicios disponibles
-                      </option>
-
-                      {services.length
-                        ? services.map(service => (
-                            <option
-                              value={service._id}
-                              key={service._id}
-                              className={styles.services__option}
-                            >
-                              {service.title.toLowerCase()} {''} (
-                              {service.modality}) {''}
-                              (${service.price.toLocaleString('es')})
-                            </option>
-                          ))
-                        : null}
-                    </select>
-                  </div>
-                  <a
-                    href='/tarifas'
-                    target='blank'
-                    className={styles.services__detail}
-                  >
-                    <p>Ver detalle de los Servicios</p>
-                  </a>
-                </div>
-              </div>
-              <div className={styles.footer}>
-                <button
-                  type='button'
-                  onClick={() => {
-                    setStep(step - 1);
-                  }}
-                >
-                  Anterior
-                </button>
+              <div className={styles.footer__initial}>
                 <button type='submit'>Siguiente</button>
               </div>
-            </>
+            </div>
           </div>
         </div>
       </form>
     );
-  } else if (step == 2) {
+  }
+  if (step === 1) {
+    return (
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <div className={styles.card}>
+          <div>
+            <div className={styles.form_body}>
+              <div className={styles.header}>
+                <h4>Elija un servicio</h4>
+                <span>{stepForm}</span>
+              </div>
+              <div className={styles.form_data}>
+                <div className={styles.input_field}>
+                  <select
+                    className={styles.select}
+                    required
+                    onChange={handleAppointmentData}
+                    defaultValue={title}
+                  >
+                    <option value='' disabled hidden>
+                      Servicios disponibles
+                    </option>
+
+                    {services.length
+                      ? services.map(singleService => (
+                          <option
+                            value={singleService._id}
+                            key={singleService._id}
+                            className={styles.services__option}
+                          >
+                            {singleService.title.toLowerCase()} (
+                            {singleService.modality}) ($
+                            {singleService.price.toLocaleString('es')})
+                          </option>
+                        ))
+                      : null}
+                  </select>
+                </div>
+                <a
+                  href='/tarifas'
+                  target='blank'
+                  className={styles.services__detail}
+                >
+                  <p>Ver detalle de los Servicios</p>
+                </a>
+              </div>
+            </div>
+            <div className={styles.footer}>
+              <button
+                type='button'
+                onClick={() => {
+                  setStep(step - 1);
+                }}
+              >
+                Anterior
+              </button>
+              <button type='submit'>Siguiente</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    );
+  }
+  if (step === 2) {
     return (
       <div className={styles.form}>
         <div className={styles.card}>
           <div>
-            <>
-              <div className={styles.form_body}>
-                <div className={styles.header}>
-                  <h4>Seleccione una fecha</h4>
-                  <span>{step_form}</span>
-                </div>
-                <div className={styles.form_data}>
-                  <Calendar
-                    day={day}
-                    setDay={setDay}
-                    time={time}
-                    setTime={setTime}
-                  />
-                </div>
+            <div className={styles.form_body}>
+              <div className={styles.header}>
+                <h4>Seleccione una fecha</h4>
+                <span>{stepForm}</span>
               </div>
-              <div className={styles.footer}>
-                <button
-                  onClick={() => {
-                    setStep(step - 1);
-                  }}
-                >
-                  Anterior
-                </button>
-                <button
-                  disabled={day || time ? '' : 'disabled'}
-                  onClick={handleAppointment}
-                >
-                  Separar Cita
-                </button>
+              <div className={styles.form_data}>
+                <Calendar
+                  day={day}
+                  setDay={setDay}
+                  time={time}
+                  setTime={setTime}
+                />
               </div>
-            </>
+            </div>
+            <div className={styles.footer}>
+              <button
+                type='button'
+                onClick={() => {
+                  setStep(step - 1);
+                }}
+              >
+                Anterior
+              </button>
+              <button
+                type='button'
+                disabled={day || time ? '' : 'disabled'}
+                onClick={handleAppointment}
+              >
+                Separar Cita
+              </button>
+            </div>
           </div>
         </div>
       </div>
     );
   }
 }
+
+Booking.propTypes = {
+  setShowModal: PropTypes.func,
+};
+Booking.defaultProps = {
+  setShowModal: () => null,
+};
 
 export default Booking;

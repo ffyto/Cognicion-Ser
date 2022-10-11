@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
+import { v4 as uuid } from 'uuid';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { getAllServices, deleteService } from '../services/services';
+import EditServiceModal from '../components/editServiceModal';
 import NavBar from '../components/navBar';
 import styles from '../styles/pages/tarifas.module.scss';
 import Footer from '../components/footer';
-import EditServiceModal from '../components/editServiceModal';
-import { getAllServices } from '../services/services';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { deleteService } from '../services/services';
-import Swal from 'sweetalert2';
 
 function Tarifas() {
   const [services, setServices] = useState([]);
@@ -17,12 +17,17 @@ function Tarifas() {
 
   const fetchData = async () => {
     const allServices = await getAllServices();
+    allServices.forEach(service =>
+      service.includedServices.forEach(includedService => {
+        includedService.id = uuid();
+      })
+    );
     setServices(allServices);
   };
 
   useEffect(() => {
     fetchData();
-    let profile = localStorage.getItem('profile');
+    const profile = localStorage.getItem('profile');
     setUser(JSON.parse(profile));
   }, []);
 
@@ -87,21 +92,21 @@ function Tarifas() {
                     {service.title} <small>({service.modality}) </small>
                   </h2>
                   <section className={styles.service__subtitle}>
-                    {service.includedServices.map((includedService, index) => (
-                      <p key={service._id + index}>({includedService.name}) </p>
+                    {service.includedServices?.map(includedService => (
+                      <p key={includedService.id}>({includedService.name}) </p>
                     ))}
                   </section>
                   <p>
                     Modalidad: <small>{service.modality}</small>
                   </p>
                   <p>
-                    Valor: <small>${service.price.toLocaleString('es')}</small>
+                    Valor: <small>${service.price?.toLocaleString('es')}</small>
                   </p>
                   <p>Servicios Incluidos:</p>
                   <ul className={styles.service__includedServices__list}>
-                    {service.includedServices.map((includedService, index) => (
+                    {service.includedServices?.map(includedService => (
                       <li
-                        key={service._id + index}
+                        key={includedService.id}
                         className={styles.service__includedServices}
                       >
                         <p>
