@@ -1,5 +1,6 @@
-import styles from '../styles/components/footer.module.scss';
+import React from 'react';
 import Image from 'next/image';
+import styles from '../styles/components/footer.module.scss';
 
 function Footer() {
   return (
@@ -11,7 +12,7 @@ function Footer() {
           alt='Cognición y Ser Logo'
           width={72}
           height={72}
-          unoptimized={true}
+          unoptimized
         />
       </span>
       <div className={styles.redes}>
@@ -19,7 +20,7 @@ function Footer() {
           <Image
             width={30}
             height={30}
-            unoptimized={true}
+            unoptimized
             src='/facebook-logo.png'
             alt='Link a Facebook'
           />
@@ -28,7 +29,7 @@ function Footer() {
           <Image
             width={50}
             height={30}
-            unoptimized={true}
+            unoptimized
             src='/instagram-logo.png'
             alt='Link a Instagram'
           />
@@ -37,7 +38,7 @@ function Footer() {
           <Image
             width={30}
             height={32}
-            unoptimized={true}
+            unoptimized
             src='/whatsapp-logo.png'
             alt='Link a WhatsApp'
           />

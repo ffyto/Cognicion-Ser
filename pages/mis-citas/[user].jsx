@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Swal from 'sweetalert2';
 import NavBar from '../../components/navBar';
 import styles from '../../styles/pages/mis-citas.module.scss';
 import Footer from '../../components/footer';
 import { getAllUserAppointments } from '../../services/appointments';
-import Swal from 'sweetalert2';
 
 function UserAppointments() {
   const [user, setUser] = useState({});
@@ -27,6 +27,7 @@ function UserAppointments() {
   };
 
   useEffect(() => {
+    const profile = JSON.parse(localStorage.getItem('profile'));
     const fetchData = async () => {
       const userAppointments = await getAllUserAppointments();
       if (!userAppointments.length) {
@@ -36,7 +37,6 @@ function UserAppointments() {
       }
       setAppointments(userAppointments);
     };
-    const profile = JSON.parse(localStorage.getItem('profile'));
     setUser(profile);
     fetchData();
   }, []);

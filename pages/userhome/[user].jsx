@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import NavBar from '../../components/navBar';
 import styles from '../../styles/pages/userhome.module.scss';
 import Footer from '../../components/footer';
 import Modal from '../../components/modal';
-import Link from 'next/link';
 import { findAppointmentByPaymentAndUpdate } from '../../services/appointments';
 
 function UserHome() {
@@ -46,7 +46,7 @@ function UserHome() {
             </small>
           </p>
           <div className={styles.grid}>
-            <button href='/acerca-de' onClick={handleOpenModal}>
+            <button type='button' href='/acerca-de' onClick={handleOpenModal}>
               <a className={styles.card}>
                 <h2>Agendar Citas &rarr;</h2>
                 <p>Agende sus próximas citas</p>

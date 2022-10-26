@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { PropTypes } from 'prop-types';
 import { useMercadopago } from 'react-sdk-mercadopago';
 import { updateAppointment } from '../services/appointments';
 
@@ -22,5 +23,14 @@ export default function Mercadopago({ preferenceId, appointmentId }) {
     appointmentUpdate();
   }, [mercadopago]);
 
-  return <div></div>;
+  return <div />;
 }
+
+Mercadopago.propTypes = {
+  preferenceId: PropTypes.string,
+  appointmentId: PropTypes.string,
+};
+Mercadopago.defaultProps = {
+  preferenceId: '',
+  appointmentId: '',
+};

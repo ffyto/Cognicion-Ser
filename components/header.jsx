@@ -1,3 +1,4 @@
+import React from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -13,13 +14,13 @@ export default function Header() {
       </Head>
       <div className={styles.image}>
         <Link href='/'>
-          <a>
+          <a href='/'>
             <Image
               src='/LOGO-colorsinfondo.png'
               width={150}
               height={150}
               alt='Cognición & Ser Logo'
-              unoptimized={true}
+              unoptimized
             />
           </a>
         </Link>

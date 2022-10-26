@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { PropTypes } from 'prop-types';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import ServiceEdition from './editService';
 import styles from '../styles/components/modal.module.scss';
 
-const EditServiceModal = ({ show, setShowModal, id }) => {
+function EditServiceModal({ show, setShowModal, id }) {
   const [isBrowser, setIsBrowser] = useState(false);
 
   useEffect(() => {
@@ -39,10 +40,9 @@ const EditServiceModal = ({ show, setShowModal, id }) => {
       modalContent,
       document.getElementById('modal-root')
     );
-  } else {
-    return null;
   }
-};
+  return null;
+}
 
 const StyledModalBody = styled.div`
   padding-top: 10px;
@@ -67,5 +67,16 @@ const StyledModalOverlay = styled.div`
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
 `;
+
+EditServiceModal.propTypes = {
+  show: PropTypes.bool,
+  setShowModal: PropTypes.func,
+  id: PropTypes.string,
+};
+EditServiceModal.defaultProps = {
+  show: false,
+  id: '',
+  setShowModal: () => null,
+};
 
 export default EditServiceModal;

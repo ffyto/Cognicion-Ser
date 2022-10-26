@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Swal from 'sweetalert2';
 import NavBar from '../../components/navBar';
 import styles from '../../styles/pages/agenda.module.scss';
 import Footer from '../../components/footer';
@@ -8,7 +9,6 @@ import {
   deleteAppointment,
 } from '../../services/appointments';
 import UserModal from '../../components/userModal';
-import Swal from 'sweetalert2';
 
 function ProfessionalAppointments() {
   const [professional, setProfessional] = useState({});
@@ -33,6 +33,7 @@ function ProfessionalAppointments() {
   };
 
   useEffect(() => {
+    const profile = JSON.parse(localStorage.getItem('profile'));
     const fetchData = async () => {
       const professionalAppointments = await getAllProfessionalAppointments();
       if (!professionalAppointments.length) {
@@ -42,7 +43,6 @@ function ProfessionalAppointments() {
       }
       setAppointments(professionalAppointments);
     };
-    const profile = JSON.parse(localStorage.getItem('profile'));
     setProfessional(profile);
     fetchData();
   }, []);
@@ -51,7 +51,6 @@ function ProfessionalAppointments() {
     setId(appointment._id);
     setShowModal(true);
   };
-
 
   const handleCancelAppointment = async appointmentId => {
     Swal.fire({
@@ -136,6 +135,7 @@ function ProfessionalAppointments() {
                     </p>
                     <section className={styles.buttons__section}>
                       <button
+                        type='button'
                         className={styles.contact__button}
                         onClick={() => openModal(appointment)}
                       >
@@ -144,6 +144,7 @@ function ProfessionalAppointments() {
 
                       {appointment.payment === 'Pendiente' ? (
                         <button
+                          type='button'
                           onClick={() =>
                             handleCancelAppointment(appointment._id)
                           }
@@ -169,6 +170,5 @@ function ProfessionalAppointments() {
     </>
   );
 }
-
 
 export default ProfessionalAppointments;

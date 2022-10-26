@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { PropTypes } from 'prop-types';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import styles from '../styles/components/userModal.module.scss';
 import { getSingleAppointment } from '../services/appointments';
 
-const Modal = ({ show, setShowModal, appointmentId }) => {
+function UserModal({ show, setShowModal, appointmentId }) {
   const [isBrowser, setIsBrowser] = useState(false);
   const [appointment, setAppointment] = useState({});
 
@@ -68,19 +69,12 @@ const Modal = ({ show, setShowModal, appointmentId }) => {
       modalContent,
       document.getElementById('modal-root')
     );
-  } else {
-    return null;
   }
-};
+  return null;
+}
 
 const StyledModalBody = styled.div`
   padding-top: 10px;
-`;
-
-const StyledModalHeader = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  font-size: 25px;
 `;
 
 const StyledModal = styled.div`
@@ -102,4 +96,15 @@ const StyledModalOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-export default Modal;
+UserModal.propTypes = {
+  show: PropTypes.bool,
+  setShowModal: PropTypes.func,
+  appointmentId: PropTypes.string,
+};
+UserModal.defaultProps = {
+  show: false,
+  appointmentId: '',
+  setShowModal: () => null,
+};
+
+export default UserModal;

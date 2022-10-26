@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Mercadopago from '../../components/mercadopago';
 import { createPayment } from '../../services/payments';
@@ -11,7 +11,7 @@ function Pagos() {
 
   useEffect(() => {
     const pago = async () => {
-      let result = await createPayment(id);
+      const result = await createPayment(id);
       setPreferenceId(result.id);
       setAppointmentId(id);
     };

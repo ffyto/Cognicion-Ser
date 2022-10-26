@@ -1,8 +1,9 @@
-import Header from '../../components/header';
+import React from 'react';
 import { useRouter } from 'next/router';
+import Swal from 'sweetalert2';
+import Header from '../../components/header';
 import styles from '../../styles/pages/activar-cuenta.module.scss';
 import Footer from '../../components/footer';
-import Swal from 'sweetalert2';
 import { verifyAccount } from '../../services/auth';
 import NavBar from '../../components/navBar';
 
@@ -52,6 +53,7 @@ export default function About() {
                 acuerdo a la disponibilidad.
               </p>
               <button
+                type='button'
                 className={styles.activate__button}
                 onClick={hanldeActivate}
               >

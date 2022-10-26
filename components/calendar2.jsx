@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import { PropTypes } from 'prop-types';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import es from 'date-fns/locale/es';
 import setHours from 'date-fns/setHours';
@@ -13,11 +14,12 @@ registerLocale('es', es);
 class Calendar extends React.Component {
   constructor(props) {
     super(props);
+    const { time, day } = this.props;
     this.state = {
-      selectedTime: this.props.time,
-      selectedDate: this.props.day,
+      selectedTime: time,
+      selectedDate: day,
       excludedTimes: [],
-      arrDates: [new Date(2022, 8, 30, 8, 15)],
+      arrDates: [],
     };
   }
 
@@ -26,12 +28,12 @@ class Calendar extends React.Component {
 
     const fetchData = async () => {
       const nonAvailableHours = await getAllNonAvailableHours();
-      nonAvailableHours.map(nonAvailableHour => {
-        const year = parseInt(nonAvailableHour.day.split('/')[2]);
-        const month = parseInt(nonAvailableHour.day.split('/')[1]);
-        const day = parseInt(nonAvailableHour.day.split('/')[0]);
-        const hour = parseInt(nonAvailableHour.hour.split(':')[0]);
-        const minute = parseInt(nonAvailableHour.hour.split(':')[1]);
+      nonAvailableHours.forEach(nonAvailableHour => {
+        const year = parseInt(nonAvailableHour.day.split('/')[2], 10);
+        const month = parseInt(nonAvailableHour.day.split('/')[1], 10);
+        const day = parseInt(nonAvailableHour.day.split('/')[0], 10);
+        const hour = parseInt(nonAvailableHour.hour.split(':')[0], 10);
+        const minute = parseInt(nonAvailableHour.hour.split(':')[1], 10);
         exclude.push(new Date(year, month - 1, day, hour, minute));
       });
     };
@@ -61,22 +63,20 @@ class Calendar extends React.Component {
     this.setState({
       excludedTimes: [],
     });
-
-    let arrSpecificDates = [];
-    for (let i = 0; i < this.state.arrDates.length; i++) {
+    const { arrDates } = this.state;
+    const arrSpecificDates = [];
+    for (let i = 0; i < arrDates.length; i += 1) {
       if (
         moment(date, moment.ISO_8601).format('YYYY/MM/DD') ===
-        moment(this.state.arrDates[i], moment.ISO_8601).format('YYYY/MM/DD')
+        moment(arrDates[i], moment.ISO_8601).format('YYYY/MM/DD')
       ) {
-        arrSpecificDates.push(
-          moment(this.state.arrDates[i], moment.ISO_8601).toObject()
-        );
+        arrSpecificDates.push(moment(arrDates[i], moment.ISO_8601).toObject());
       }
     }
 
-    let arrExcludedTimes = [];
+    const arrExcludedTimes = [];
 
-    for (let i = 0; i < arrSpecificDates.length; i++) {
+    for (let i = 0; i < arrSpecificDates.length; i += 1) {
       arrExcludedTimes.push(
         setHours(
           setMinutes(new Date(), arrSpecificDates[i].minutes),
@@ -90,7 +90,7 @@ class Calendar extends React.Component {
   };
 
   filterDays = date => {
-    let nonAvailableDays = new Date();
+    const nonAvailableDays = new Date();
     const today = new Date(date);
     nonAvailableDays.setDate(nonAvailableDays.getDate() + 3);
     const day = date.getDay();
@@ -143,4 +143,18 @@ class Calendar extends React.Component {
     );
   }
 }
+
+Calendar.propTypes = {
+  time: PropTypes.instanceOf(Date),
+  day: PropTypes.instanceOf(Date),
+  setDay: PropTypes.func,
+  setTime: PropTypes.func,
+};
+Calendar.defaultProps = {
+  time: null,
+  day: null,
+  setDay: () => null,
+  setTime: () => null,
+};
+
 export default Calendar;
