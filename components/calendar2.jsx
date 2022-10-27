@@ -11,6 +11,15 @@ import { getAllNonAvailableHours } from '../services/nonAvailableHours';
 
 registerLocale('es', es);
 
+const filterDays = date => {
+  const nonAvailableDays = new Date();
+  const today = new Date(date);
+  nonAvailableDays.setDate(nonAvailableDays.getDate() + 3);
+  const day = date.getDay();
+
+  return day !== 0 && day !== 6 && nonAvailableDays <= today;
+};
+
 class Calendar extends React.Component {
   constructor(props) {
     super(props);
@@ -89,16 +98,6 @@ class Calendar extends React.Component {
     }
   };
 
-  // eslint-disable-next-line class-methods-use-this
-  filterDays = date => {
-    const nonAvailableDays = new Date();
-    const today = new Date(date);
-    nonAvailableDays.setDate(nonAvailableDays.getDate() + 3);
-    const day = date.getDay();
-
-    return day !== 0 && day !== 6 && nonAvailableDays <= today;
-  };
-
   restartTime = () => {
     this.setState({ selectedTime: null });
   };
@@ -117,7 +116,7 @@ class Calendar extends React.Component {
           popperPlacement='top-start'
           dateFormat='dd/MM/yyyy'
           minDate={new Date()}
-          filterDate={this.filterDays}
+          filterDate={filterDays}
           withPortal
           placeholderText='Seleccione una fecha'
         />

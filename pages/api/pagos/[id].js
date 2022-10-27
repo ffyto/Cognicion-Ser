@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 import mercadopago from 'mercadopago';
 import connectDb from '../connectDb';
 import { getSingleAppointment } from '../appointments/appointments.service';
@@ -44,7 +43,7 @@ export default async function pagos(req, res) {
       date_of_expiration: '2022-10-30T23:59:59.000-04:00',
     };
 
-    mercadopago.preferences
+    return mercadopago.preferences
       .create(preference)
       .then(response => {
         global.id = response.body.id;
@@ -58,9 +57,8 @@ export default async function pagos(req, res) {
         console.log(error);
         return res.status(500).json({ error });
       });
-  } else {
-    return null;
   }
+  return res.status(405).json({ message: 'Método no permitido' });
 }
 
 export const config = {
