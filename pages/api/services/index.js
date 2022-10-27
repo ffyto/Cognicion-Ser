@@ -39,8 +39,11 @@ export default async function handler(req, res) {
             message: 'Ha ocurrido un error al intentar crear el servicio',
           });
         }
+      } else {
+        return null;
       }
     }
+    default:
+      return null;
   }
 }
-

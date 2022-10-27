@@ -76,7 +76,7 @@ export function registerLogin(req, res) {
     birthMonth < 0 ||
     (birthMonth === 0 && today.getDate() < birthdate.getDate())
   ) {
-    age = age - 1;
+    age -= 1;
   }
   const payload = { email, password, name, lastName, phoneNumber, age };
   const { error } = registerSchema.validate(payload);

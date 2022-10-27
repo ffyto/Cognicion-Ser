@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import mercadopago from 'mercadopago';
 import connectDb from '../connectDb';
 import { getSingleAppointment } from '../appointments/appointments.service';
@@ -16,7 +17,7 @@ export default async function pagos(req, res) {
       return res;
     }
 
-    const user = req.user;
+    const { user } = req;
 
     const appointment = await getSingleAppointment(id);
 
@@ -24,7 +25,7 @@ export default async function pagos(req, res) {
       access_token: `${process.env.NEXT_PROD_ACCESS_TOKEN}`,
     });
 
-    let preference = {
+    const preference = {
       items: [
         {
           id: appointment.id,
@@ -45,7 +46,7 @@ export default async function pagos(req, res) {
 
     mercadopago.preferences
       .create(preference)
-      .then(function (response) {
+      .then(response => {
         global.id = response.body.id;
         return res.status(200).json({
           id: response.body.id,
@@ -53,10 +54,12 @@ export default async function pagos(req, res) {
           message: 'Puede proceder con el pago',
         });
       })
-      .catch(function (error) {
+      .catch(error => {
         console.log(error);
         return res.status(500).json({ error });
       });
+  } else {
+    return null;
   }
 }
 

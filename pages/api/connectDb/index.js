@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+
 const URI = process.env.NEXT_PUBLIC_MONGO_URI;
 
 export default function connectDb() {

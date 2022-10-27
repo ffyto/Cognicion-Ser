@@ -1,4 +1,4 @@
-import connectDb from '../../connectDb/';
+import connectDb from '../../connectDb';
 import { findUserByEmail } from '../users.service';
 
 export default async function handler(req, res) {

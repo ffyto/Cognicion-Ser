@@ -66,7 +66,7 @@ export default async function handler(req, res) {
           },
         };
 
-        const mail = await sendMail(message);
+        await sendMail(message);
 
         console.log('[SUCCESS]: User created successfully', user);
         return res.status(201).json(user.profile);
@@ -75,5 +75,7 @@ export default async function handler(req, res) {
         return res.status(500).json({ error });
       }
     }
+    default:
+      return null;
   }
 }

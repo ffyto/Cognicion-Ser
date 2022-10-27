@@ -49,13 +49,11 @@ export default async function handler(req, res) {
           .json({ message: 'Servicio actualizado:', service });
       } catch (error) {
         console.error(`[ERROR]: ${error}`);
-        return res
-          .status(500)
-          .json({
-            status: 500,
-            message: 'Error al intentar actualizar el servicio',
-            error,
-          });
+        return res.status(500).json({
+          status: 500,
+          message: 'Error al intentar actualizar el servicio',
+          error,
+        });
       }
     }
 
@@ -72,5 +70,7 @@ export default async function handler(req, res) {
         return res.status(500).json({ error });
       }
     }
+    default:
+      return null;
   }
 }
