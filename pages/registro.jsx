@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import { getUserByEmail, createUser } from '../services/users';
+import React, { useState } from 'react';
+import Link from 'next/link';
+import 'react-datepicker/dist/react-datepicker.css';
 import { useRouter } from 'next/router';
 import DatePicker, { registerLocale } from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import es from 'date-fns/locale/es';
 import Swal from 'sweetalert2';
+import { getUserByEmail, createUser } from '../services/users';
 import Header from '../components/header';
 import styles from '../styles/pages/registro.module.scss';
 import Footer from '../components/footer';
-import Link from 'next/link';
 
 registerLocale('es', es);
 
@@ -189,9 +189,7 @@ export default function Register() {
             <b>Registrarse</b>{' '}
           </button>
           <hr />
-          <Link href='/login'>
-            <a>¿Ya tiene una cuenta? Inicie sesión</a>
-          </Link>
+          <Link href='/login'>¿Ya tiene una cuenta? Inicie sesión</Link>
         </form>
       </main>
       <Footer />

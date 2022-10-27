@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Swal from 'sweetalert2';
+import Link from 'next/link';
 import Header from '../components/header';
 import styles from '../styles/pages/login.module.scss';
 import Footer from '../components/footer';
-import Link from 'next/link';
 import { loginHandler } from '../services/auth';
 
 export default function Login() {
@@ -14,11 +14,6 @@ export default function Login() {
   const handleInput = e => {
     const { value, name } = e.target;
     setForm({ ...form, [name]: value });
-  };
-
-  const handleLogin = async e => {
-    e.preventDefault();
-    fetchData();
   };
 
   const fetchData = async () => {
@@ -47,6 +42,11 @@ export default function Login() {
         confirmButtonText: 'Aceptar',
       });
     }
+  };
+
+  const handleLogin = async e => {
+    e.preventDefault();
+    fetchData();
   };
 
   return (
@@ -87,9 +87,7 @@ export default function Login() {
             <b>Iniciar Sesión</b>{' '}
           </button>
           <hr />
-          <Link href='/registro'>
-            <a>¿No tiene una cuenta? Regístrese</a>
-          </Link>
+          <Link href='/registro'>¿No tiene una cuenta? Regístrese</Link>
         </form>
       </main>
       <Footer />

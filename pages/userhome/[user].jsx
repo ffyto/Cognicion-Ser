@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -46,25 +47,28 @@ function UserHome() {
             </small>
           </p>
           <div className={styles.grid}>
-            <button type='button' href='/acerca-de' onClick={handleOpenModal}>
-              <a className={styles.card}>
-                <h2>Agendar Citas &rarr;</h2>
-                <p>Agende sus próximas citas</p>
-              </a>
+            <button
+              className={styles.card}
+              type='button'
+              href='/acerca-de'
+              onClick={handleOpenModal}
+            >
+              <h2>Agendar Citas &rarr;</h2>
+              <p>Agende sus próximas citas</p>
             </button>
 
             <Link href={`/mis-citas/${user.name}-${user.lastName}`}>
-              <a className={styles.card}>
+              <div className={styles.card}>
                 <h2>Mis Citas &rarr;</h2>
                 <p>Verifique sus citas ya agendadas</p>
-              </a>
+              </div>
             </Link>
 
-            <Link href={`/tarifas`}>
-              <a className={styles.card}>
+            <Link href='/tarifas'>
+              <div className={styles.card}>
                 <h2>Servicios &rarr;</h2>
                 <p>Vea en detalle los servicios que ofrecemos</p>
-              </a>
+              </div>
             </Link>
           </div>
           <Modal setShowModal={setShowModal} show={showModal} />

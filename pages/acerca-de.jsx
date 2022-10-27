@@ -1,8 +1,8 @@
+import React from 'react';
+import Image from 'next/image';
 import Header from '../components/header';
-
 import styles from '../styles/pages/acerca-de.module.scss';
 import Footer from '../components/footer';
-import Image from 'next/image';
 import NavBar from '../components/navBar';
 
 export default function About() {
@@ -39,7 +39,7 @@ export default function About() {
               </p>
               <br />
               <p>
-                Nuetra Misión: {''}
+                Nuetra Misión: <br />
                 <small>
                   Somos un equipo que busca la prestación de un servicio
                   interdisciplinario y de calidad desde las bases clínicas y
@@ -49,7 +49,7 @@ export default function About() {
               </p>
               <br />
               <p>
-                Nuetra Visión: {''}
+                Nuetra Visión: <br />
                 <small>
                   En el año 2026 Cognición &amp; Ser será un referente en la
                   ciudad de Medellín y en otros lugares del país en la
@@ -60,7 +60,7 @@ export default function About() {
               </p>
               <br />
               <p>
-                Nuetro Equipo: {''}
+                Nuetro Equipo: <br />
                 <small>
                   Somos profesionales con alta experiencia clínica, con pregrado
                   en Psicología, Posgrado en Neuropsicología y especialista en
@@ -70,7 +70,7 @@ export default function About() {
               </p>
               <br />
               <p>
-                Nuetros Valores: {''}
+                Nuetros Valores: <br />
                 <small>
                   Respeto por el Otro, Dedicación, Profesionalismo y Empatía.
                 </small>
@@ -78,7 +78,7 @@ export default function About() {
               <Image
                 width={400}
                 height={150}
-                unoptimized={true}
+                unoptimized
                 src='/acerca-de.png'
                 className={styles.image}
               />
@@ -88,6 +88,5 @@ export default function About() {
         <Footer />
       </div>
     </>
-
   );
 }

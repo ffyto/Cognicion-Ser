@@ -1,8 +1,8 @@
+import React from 'react';
+import Image from 'next/image';
 import Header from '../components/header';
 import styles from '../styles/pages/contacto.module.scss';
 import Footer from '../components/footer';
-import Image from 'next/image';
-
 import NavBar from '../components/navBar';
 
 export default function Contact() {
@@ -26,7 +26,7 @@ export default function Contact() {
                   <Image
                     width={30}
                     height={30}
-                    unoptimized={true}
+                    unoptimized
                     src='/facebook-logo.png'
                     alt='Link a Facebook'
                     className={styles.image}
@@ -36,7 +36,7 @@ export default function Contact() {
                   <Image
                     width={50}
                     height={30}
-                    unoptimized={true}
+                    unoptimized
                     src='/instagram-logo.png'
                     className={styles.image}
                     alt='Link a Instagram'
@@ -46,7 +46,7 @@ export default function Contact() {
                   <Image
                     width={32}
                     height={32}
-                    unoptimized={true}
+                    unoptimized
                     src='/whatsapp-logo.png'
                     className={styles.image}
                     alt='Link a WhatsApp'
@@ -67,6 +67,5 @@ export default function Contact() {
         <Footer />
       </div>
     </>
-
   );
 }

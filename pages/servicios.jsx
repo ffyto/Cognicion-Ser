@@ -1,7 +1,8 @@
+import React from 'react';
+import Image from 'next/image';
 import Header from '../components/header';
 import styles from '../styles/pages/servicios.module.scss';
 import Footer from '../components/footer';
-import Image from 'next/image';
 import NavBar from '../components/navBar';
 
 export default function Services() {
@@ -37,7 +38,7 @@ export default function Services() {
                   alt='Evaluación Neuropsicológica'
                   width={72}
                   height={150}
-                  unoptimized={true}
+                  unoptimized
                   className={styles.image}
                 />
               </div>
@@ -49,7 +50,7 @@ export default function Services() {
                   alt='Rehabilitación Neuropsicológica'
                   width={72}
                   height={150}
-                  unoptimized={true}
+                  unoptimized
                   className={styles.image}
                 />
               </div>
@@ -78,7 +79,7 @@ export default function Services() {
                   alt='Asesoría familiar'
                   width={72}
                   height={150}
-                  unoptimized={true}
+                  unoptimized
                   className={styles.image}
                 />
               </div>
@@ -90,7 +91,7 @@ export default function Services() {
                   alt='Asesoría familiar'
                   width={72}
                   height={150}
-                  unoptimized={true}
+                  unoptimized
                   className={styles.image}
                 />
               </div>
