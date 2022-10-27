@@ -89,6 +89,7 @@ class Calendar extends React.Component {
     }
   };
 
+  // eslint-disable-next-line class-methods-use-this
   filterDays = date => {
     const nonAvailableDays = new Date();
     const today = new Date(date);
